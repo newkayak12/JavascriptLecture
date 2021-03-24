@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>io</title>
+</head>
+<body>
+        <pre>
+            document.write 
+            inner.html : 해당 페이지 원하는 문구 등을 출력할 때
+
+
+
+            ---------같이 보고
+            windows.alert : 알림
+            consol.log : 개발자가 체크할 때
+        </pre>
+
+        <h1>데이터 출력하기</h1>
+        <pre>
+            스크립트에서 데이터를 출력하는 방식은 총 두 개로 나눌 수 있다.
+            1. 페이지에 출력하는 방법과
+            2. 시스템적으로 브라우저가 알림창/콘솔을 띄우는 방법
+        </pre>
+
+        <ul>
+            <li>페이지 출력 방법
+                <ol>
+                    <li>document.write("출력구문||태그+출력구문")</li>
+                    <li>태그 선택. innerHTML="출력구문"</li>
+                </ol>
+            </li>
+            <li>브라우저에서 출력
+                <ol>
+                    <li>알림창으로 출력(alert('출력문구')</li>
+                    <li>콘솔창으로 출력(console.log('출력문구')</li>
+                </ol>
+            </li>
+        </ul>
+
+    <hr>
+        <h3>페이지 출력하기</h3>
+        <h4>documnet.write()함수 이용하기</h4>
+        <script>
+            document.write("write로 작성한 문구");
+            // document.write함수의 매개변수에 태그형식으로 넣으면 어떻게 될까?
+            document.write("<h1> 이것도 write함수 이용 </h1>");
+            document.write("<img src = 'data:image/jpeg;base64,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'>");
+            
+        </script>
+
+
+
+    <hr>
+        <h4>샘플</h4>
+        <button onclick="addimg();">이미지 추가</button>
+
+        <script>
+            function addimg(){
+                 document.write("<img src = 'data:image/jpeg;base64,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'>");
+            }
+        </script>
+    <hr>
+        <h4>innerHTML속성 이용하기</h4>
+        <pre>
+            태그마다 innerhtml이라는 속성이 있는데, 
+            이 속성은 현재 출력하고 있는 문구를 저장하는 속성이다.
+            innerhtml 속성에 저장되어있는 문구가 화면에 출력됨
+            태그선택.innerhtml='문구';
+        </pre>
+
+        <div id="target"></div>
+        <button onclick="inputdata();">print</button>
+        <script>
+            function inputdata(){
+                document.getElementById ("target").innerHTML="출력 문구 바꾸기";
+            }
+        </script>
+
+    <hr>
+        <h3>브라우저에 출력하기</h3>
+        <h4>알람창으로 출력하기 : alert()함수를 이용한다.</h4>
+
+        <script>
+            // alert("알람창 출력");
+            // 클라이언트에게 알림 메시지를 출력할 떄 사용
+            // 디버깅시 실행여부를 확인할 떄도 사용 / 변수값(콘솔로 많이 합니다.)
+
+        </script>
+
+        <h4>console창에 출력하기 : console.log()함수 이용</h4>
+
+        <pre>
+            console.log("이건 콘솔창에 출력");
+            console.error("아니야!");
+            console.warn("경고 문구");
+            console.table(document.getElementById("target")); :테이블로 뿌리고
+            console.dir(document.getElementById("target")); :객체 형식 분할 
+        </pre>
+
+        <script>
+            // 개발자 도구 console 탭에서 확인할 수 있음
+            // 일반적으로 클라들은 몰라서 못 봄
+            // 개발시에 확인이 필요한 내용을 출력
+            // 에러메시지나 경고 메시지를 출력
+            console.log("이건 콘솔창에 출력");
+            console.error("아니야!");
+            console.warn("경고 문구");
+
+            // error는 빨간색으로 되고 stacktrace가 자동으로
+            // log는 그냥 메시지만
+            // warn은 경고 (노란색)
+
+
+            // 속성 값을 테이블 형식으로 출력
+            console.table(document.getElementById("target"));
+            console.dir(document.getElementById("target"));
+        </script>
+
+    <hr>
+
+        <h3>데이터 입력</h3>
+        <pre>
+            자바스크립트 내장 객체인 confirm(), prompt() 메소드를 이용하여 입력받을 수도 있고
+            html태그에 접근해서 대상을 읽거나
+            html input태그를 통해 입력 받을 수도 있음
+
+            1.합수로 입력받는 방법
+                - prompt()
+                - confirm()
+
+            2. input태그를 이용해서 입력받는 방법
+
+
+        </pre>
+
+        <h4>함수를 이용해서 입력받는 방법</h4>
+        <h5>confirm()</h5>
+        <pre>
+            confirm()함수는 true/false를 반환하는 함수
+            확인 (true) / 취소 (false)
+        </pre>
+
+        <script>
+            // console.log(confirm("당신은 19세 이상 입니까?"));
+            
+            // 얘와 함꼐 확인 취소가 나오는 알람창이 뜸
+
+            // 이러면 true/ false로 분기문처리
+        </script>
+
+        <h5>prompt()</h5>
+        <pre>
+            확인/취소로 true/false를 confirm으로 받았다면
+
+            propt()는 사용자에게 특정 문구를 입력받아 반환하는 것
+
+        </pre>
+
+        <script>
+            // console.log(prompt("당신의 취미를 입력하세요"));
+        </script>
+        <h6>예시 _ </h6>
+        <p id = "promptest"></p>
+
+        <script>
+            // document.getElementById("promptest").innerHTML=prompt("당신의 취미는 ");
+            // 이렇게 끌어와서 박아 넣을 수도 있다.
+        </script>
+
+        <h3>input입력 받는 방법</h3>
+        <input type="text" id="userid" name="userid">
+        <!-- 입력 받을 떄는 특정한 이벤트가 있어야한다. -->
+
+        <button onclick="checkInput()">data 가져오기</button>
+
+        <script>
+            function checkInput(){
+
+                
+                // console.log(document.getElementById("userid").value);
+                document.getElementById("promptest").innerHTML=document.getElementById("userid").value;
+            }
+        </script>
+
+
+        <h3></h3>
+        
+</body>
+</html>
