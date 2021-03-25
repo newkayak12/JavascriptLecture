@@ -1,0 +1,1338 @@
+<!-- basic syntax -->
+
+<!-- 
+
+0. 주석처리
+
+//로 한 줄 주석
+/* */로 여러 줄 주석
+------------------- 얘는 <script></script> 안에서 혹은 js파일에서 유효함 
+
+html <.!-- --.>
+css /* */
+
+
+1. 변수 선언
+멤버변수와 지역변수로 나뉜다.
+
+멤버변수 : 전역변수, 기본적으로 window객체의 멤버 변수 (자료형은 따로 있으나, 선언은 하지 않음)
+
+    얘가 특이한 점은 html태그 안에서 적용되니까 이 페이지 전체에 적용이 된다구요... 
+    이 페이지를 중심으로 객체화하는데 이 객체의 최상위 객체가 window이다.
+    window 객체에서 제공하는 함수나 변수를 사용할 수 있다. 
+
+
+    전역변수는 window객체의 변수 
+    지역변수는 script구문을 쓰면 페이지 안에 있죠? 
+    이러면 둘 다 전역이 될거잖아
+
+그래서 전역/지역 나누는 것??
+
+function 안에서 선언하면 지역변수 : local scope
+function 밖에서 선언하면 전역변수 : global scope > 해당 페이지 안에서 (페이지 안에 종속적)
+
+
+변수의 선언은 (자바에서는 자료형 변수명 ;) 스크립트는 보다 유연하기 때문에 자료형을 따로 지정하지 않고 'var 변수명;' 이렇게 쓴다.
+스크립도 자료형이 있는데... 변수에 어떤 리터럴이 대입됐을 떄, 그 리터럴의 타입을 보고 알아서 판단해준다. 즉, 우리가 직접 자료형을 지정하지는 않는다.
+
+
+
+
+
+ -->
+
+
+ <!DOCTYPE html>
+    <html lang="en">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Basic JavaScript_variable</title>
+        </head>
+
+        <body>
+            <h1>변수 선언하기</h1>
+            <pre>
+                변수 선언하는 방법
+                var 변수;
+
+                자바스크립트에서 변수를 선언할 때는 자료형을 결정하지 않는다.(알아서 내부적으로 결정해준다. 과연 그런데 컴퓨터따리가 그렇게 똑똑할까??)
+                (
+                    내부에서 변수가 어떻게 구성되는가?? 자바는 기본형/ 참조형으로 나뉜다. 자바 스크립트는 무조건 참조형 밖에 자료형이 없다. 
+                    즉, 어차피 다 주소를 저장하니까...
+                    객체는 주소의 주소를 참조하는
+
+                    얘는 변수 타입이 값을 대입하면 타입이 결정이 남(주소로 따라간 값의 타입을 따라간다는 소리겠지)
+                    대입을 안하면 undefine
+
+                    
+                )
+            </pre>
+
+            <script>
+
+                var test;
+                // 얘는 global 
+                console.log(test);
+
+                    function functest (){
+                        var t;
+                        // 얘는 local
+                        console.log(test);
+                        console.log(t);
+                    }
+                functest();
+                //  이러면 function 내부 지역변수 인지함
+
+                console.log(t);
+                // 25.03.21_04_syntax.html:84 
+                // Uncaught ReferenceError: t is not defined at 25.03.21_04_syntax.html:84
+
+            </script>
+
+
+            <pre>
+                변수는 접근할 수 있는 범위에 따라 영역을(scope) 구분한다.
+
+                영역은  global scope/ local scope로 나눈다.
+                global scope : 페이지 내부 어디서든 접근이 가능한 변수 > window 객체의 멤버 변수가 된다.(window는 페이지 전체를 포함함)
+                local scope : function 내부에서 선언한 변수 > function 내부에서만 사용이 가능하다. 
+
+
+               [ winodw란??
+
+
+               ]
+
+
+
+            
+               javascript는 블록 범위를 허용하지 않는다.
+               > java 같은 경우는 if(){ String test; } 이렇게 선언한 변수는 외부에서 접근이 불가능하다. 여튼 안에서 쓰고 끝나지
+               > javascript는 if(){ var test; } 이렇게 쓰면 외부에서 접근이 가능하다. 얘는 영역을 function 외부, function 내부로만 나눈다.
+
+
+            </pre>
+
+            <script>
+                var age = 19;
+                    
+                    if(age >= 19){
+                        var name = "유병승";
+                    }
+
+                    for(var i=0; i<10; i++){
+                        console.log(i);
+                    }
+                
+                console.log("외부에서 호출"+i);
+                
+                
+                console.log(name);
+                // 유병승  25.03.21_04_SyntaxVariable.html:12
+                // 접근이 되네?? > 자바에서는 불가능했잖아
+                // 이렇게 하면 name은 전역변수가 되네
+                
+                console.log(window);
+
+//                 Window {window: Window, self: Window, document: document, name: "유병승", location: Location, …}
+// age: 19
+// alert: ƒ alert()
+// atob: ƒ atob()
+// blur: ƒ blur()
+// btoa: ƒ btoa()
+// caches: CacheStorage {}
+// cancelAnimationFrame: ƒ cancelAnimationFrame()
+// cancelIdleCallback: ƒ cancelIdleCallback()
+// captureEvents: ƒ captureEvents()
+// chrome: {loadTimes: ƒ, csi: ƒ}
+// clearInterval: ƒ clearInterval()
+// clearTimeout: ƒ clearTimeout()
+// clientInformation: Navigator {vendorSub: "", productSub: "20030107", vendor: "Google Inc.", maxTouchPoints: 0, userActivation: UserActivation, …}
+// close: ƒ close()
+// closed: false
+// confirm: ƒ confirm()
+// cookieStore: CookieStore {onchange: null}
+// createImageBitmap: ƒ createImageBitmap()
+// crossOriginIsolated: false
+// crypto: Crypto {subtle: SubtleCrypto}
+// customElements: CustomElementRegistry {}
+// defaultStatus: ""
+// defaultstatus: ""
+// devicePixelRatio: 2
+// document: document
+// external: External {}
+// fetch: ƒ fetch()
+// find: ƒ find()
+// focus: ƒ focus()
+// frameElement: null
+// frames: Window {window: Window, self: Window, document: document, name: "유병승", location: Location, …}
+// functest: ƒ functest()
+// getComputedStyle: ƒ getComputedStyle()
+// getSelection: ƒ getSelection()
+// history: History {length: 1, scrollRestoration: "auto", state: null}
+// i: 10
+// indexedDB: IDBFactory {}
+// innerHeight: 742
+// innerWidth: 720
+// isSecureContext: true
+// length: 0
+// localStorage: Storage {length: 0}
+// location: Location {ancestorOrigins: DOMStringList, href: "file:///Users/sanghyeonkim/Downloads/javascript/25.03.21/25.03.21_04_SyntaxVariable.html", origin: "file://", protocol: "file:", host: "", …}
+// locationbar: BarProp {visible: true}
+// matchMedia: ƒ matchMedia()
+// menubar: BarProp {visible: true}
+// moveBy: ƒ moveBy()
+// moveTo: ƒ moveTo()
+// name: "유병승"
+// navigator: Navigator {vendorSub: "", productSub: "20030107", vendor: "Google Inc.", maxTouchPoints: 0, userActivation: UserActivation, …}
+// onabort: null
+// onafterprint: null
+// onanimationend: null
+// onanimationiteration: null
+// onanimationstart: null
+// onappinstalled: null
+// onauxclick: null
+// onbeforeinstallprompt: null
+// onbeforeprint: null
+// onbeforeunload: null
+// onblur: null
+// oncancel: null
+// oncanplay: null
+// oncanplaythrough: null
+// onchange: null
+// onclick: null
+// onclose: null
+// oncontextmenu: null
+// oncuechange: null
+// ondblclick: null
+// ondevicemotion: null
+// ondeviceorientation: null
+// ondeviceorientationabsolute: null
+// ondrag: null
+// ondragend: null
+// ondragenter: null
+// ondragleave: null
+// ondragover: null
+// ondragstart: null
+// ondrop: null
+// ondurationchange: null
+// onemptied: null
+// onended: null
+// onerror: null
+// onfocus: null
+// onformdata: null
+// ongotpointercapture: null
+// onhashchange: null
+// oninput: null
+// oninvalid: null
+// onkeydown: null
+// onkeypress: null
+// onkeyup: null
+// onlanguagechange: null
+// onload: null
+// onloadeddata: null
+// onloadedmetadata: null
+// onloadstart: null
+// onlostpointercapture: null
+// onmessage: null
+// onmessageerror: null
+// onmousedown: null
+// onmouseenter: null
+// onmouseleave: null
+// onmousemove: null
+// onmouseout: null
+// onmouseover: null
+// onmouseup: null
+// onmousewheel: null
+// onoffline: null
+// ononline: null
+// onpagehide: null
+// onpageshow: null
+// onpause: null
+// onplay: null
+// onplaying: null
+// onpointercancel: null
+// onpointerdown: null
+// onpointerenter: null
+// onpointerleave: null
+// onpointermove: null
+// onpointerout: null
+// onpointerover: null
+// onpointerrawupdate: null
+// onpointerup: null
+// onpopstate: null
+// onprogress: null
+// onratechange: null
+// onrejectionhandled: null
+// onreset: null
+// onresize: null
+// onscroll: null
+// onsearch: null
+// onseeked: null
+// onseeking: null
+// onselect: null
+// onselectionchange: null
+// onselectstart: null
+// onstalled: null
+// onstorage: null
+// onsubmit: null
+// onsuspend: null
+// ontimeupdate: null
+// ontoggle: null
+// ontransitioncancel: null
+// ontransitionend: null
+// ontransitionrun: null
+// ontransitionstart: null
+// onunhandledrejection: null
+// onunload: null
+// onvolumechange: null
+// onwaiting: null
+// onwebkitanimationend: null
+// onwebkitanimationiteration: null
+// onwebkitanimationstart: null
+// onwebkittransitionend: null
+// onwheel: null
+// open: ƒ open()
+// openDatabase: ƒ openDatabase()
+// opener: null
+// origin: "null"
+// originAgentCluster: false
+// outerHeight: 821
+// outerWidth: 720
+// pageXOffset: 0
+// pageYOffset: 0
+// parent: Window {window: Window, self: Window, document: document, name: "유병승", location: Location, …}
+// performance: Performance {timeOrigin: 1616634341725.315, onresourcetimingbufferfull: null, eventCounts: EventCounts, timing: PerformanceTiming, navigation: PerformanceNavigation, …}
+// personalbar: BarProp {visible: true}
+// postMessage: ƒ postMessage()
+// print: ƒ print()
+// prompt: ƒ prompt()
+// queueMicrotask: ƒ queueMicrotask()
+// releaseEvents: ƒ releaseEvents()
+// requestAnimationFrame: ƒ requestAnimationFrame()
+// requestIdleCallback: ƒ requestIdleCallback()
+// resizeBy: ƒ resizeBy()
+// resizeTo: ƒ resizeTo()
+// screen: Screen {availWidth: 1440, availHeight: 821, width: 1440, height: 900, colorDepth: 30, …}
+// screenLeft: 720
+// screenTop: 25
+// screenX: 720
+// screenY: 25
+// scroll: ƒ scroll()
+// scrollBy: ƒ scrollBy()
+// scrollTo: ƒ scrollTo()
+// scrollX: 0
+// scrollY: 0
+// scrollbars: BarProp {visible: true}
+// self: Window {window: Window, self: Window, document: document, name: "유병승", location: Location, …}
+// sessionStorage: Storage {length: 0}
+// setInterval: ƒ setInterval()
+// setTimeout: ƒ setTimeout()
+// showDirectoryPicker: ƒ showDirectoryPicker()
+// showOpenFilePicker: ƒ showOpenFilePicker()
+// showSaveFilePicker: ƒ showSaveFilePicker()
+// speechSynthesis: SpeechSynthesis {pending: false, speaking: false, paused: false, onvoiceschanged: null}
+// status: ""
+// statusbar: BarProp {visible: true}
+// stop: ƒ stop()
+// styleMedia: StyleMedia {type: "screen"}
+// test: undefined
+// toolbar: BarProp {visible: true}
+// top: Window {window: Window, self: Window, document: document, name: "유병승", location: Location, …}
+// trustedTypes: TrustedTypePolicyFactory {emptyHTML: emptyHTML "", emptyScript: emptyScript "", defaultPolicy: null}
+// visualViewport: VisualViewport {offsetLeft: 0, offsetTop: 0, pageLeft: 0, pageTop: 0, width: 720, …}
+// webkitCancelAnimationFrame: ƒ webkitCancelAnimationFrame()
+// webkitRequestAnimationFrame: ƒ webkitRequestAnimationFrame()
+// webkitRequestFileSystem: ƒ webkitRequestFileSystem()
+// webkitResolveLocalFileSystemURL: ƒ webkitResolveLocalFileSystemURL()
+// webkitStorageInfo: DeprecatedStorageInfo {}
+// window: Window {window: Window, self: Window, document: document, name: "유병승", location: Location, …}
+// __REACT_DEVTOOLS_APPEND_COMPONENT_STACK__: true
+// __REACT_DEVTOOLS_BREAK_ON_CONSOLE_ERRORS__: false
+// __REACT_DEVTOOLS_COMPONENT_FILTERS__: [{…}]
+// Infinity: Infinity
+// AbortController: ƒ AbortController()
+// AbortSignal: ƒ AbortSignal()
+// AbsoluteOrientationSensor: ƒ AbsoluteOrientationSensor()
+// Accelerometer: ƒ Accelerometer()
+// AggregateError: ƒ AggregateError()
+// AnalyserNode: ƒ AnalyserNode()
+// Animation: ƒ Animation()
+// AnimationEffect: ƒ AnimationEffect()
+// AnimationEvent: ƒ AnimationEvent()
+// AnimationPlaybackEvent: ƒ AnimationPlaybackEvent()
+// AnimationTimeline: ƒ AnimationTimeline()
+// Array: ƒ Array()
+// ArrayBuffer: ƒ ArrayBuffer()
+// Atomics: Atomics {load: ƒ, store: ƒ, add: ƒ, sub: ƒ, and: ƒ, …}
+// Attr: ƒ Attr()
+// Audio: ƒ Audio()
+// AudioBuffer: ƒ AudioBuffer()
+// AudioBufferSourceNode: ƒ AudioBufferSourceNode()
+// AudioContext: ƒ AudioContext()
+// AudioDestinationNode: ƒ AudioDestinationNode()
+// AudioListener: ƒ AudioListener()
+// AudioNode: ƒ AudioNode()
+// AudioParam: ƒ AudioParam()
+// AudioParamMap: ƒ AudioParamMap()
+// AudioProcessingEvent: ƒ AudioProcessingEvent()
+// AudioScheduledSourceNode: ƒ AudioScheduledSourceNode()
+// AudioWorklet: ƒ AudioWorklet()
+// AudioWorkletNode: ƒ AudioWorkletNode()
+// AuthenticatorAssertionResponse: ƒ AuthenticatorAssertionResponse()
+// AuthenticatorAttestationResponse: ƒ AuthenticatorAttestationResponse()
+// AuthenticatorResponse: ƒ AuthenticatorResponse()
+// BackgroundFetchManager: ƒ BackgroundFetchManager()
+// BackgroundFetchRecord: ƒ BackgroundFetchRecord()
+// BackgroundFetchRegistration: ƒ BackgroundFetchRegistration()
+// BarProp: ƒ BarProp()
+// BarcodeDetector: ƒ BarcodeDetector()
+// BaseAudioContext: ƒ BaseAudioContext()
+// BatteryManager: ƒ BatteryManager()
+// BeforeInstallPromptEvent: ƒ BeforeInstallPromptEvent()
+// BeforeUnloadEvent: ƒ BeforeUnloadEvent()
+// BigInt: ƒ BigInt()
+// BigInt64Array: ƒ BigInt64Array()
+// BigUint64Array: ƒ BigUint64Array()
+// BiquadFilterNode: ƒ BiquadFilterNode()
+// Blob: ƒ Blob()
+// BlobEvent: ƒ BlobEvent()
+// Bluetooth: ƒ Bluetooth()
+// BluetoothCharacteristicProperties: ƒ BluetoothCharacteristicProperties()
+// BluetoothDevice: ƒ BluetoothDevice()
+// BluetoothRemoteGATTCharacteristic: ƒ BluetoothRemoteGATTCharacteristic()
+// BluetoothRemoteGATTDescriptor: ƒ BluetoothRemoteGATTDescriptor()
+// BluetoothRemoteGATTServer: ƒ BluetoothRemoteGATTServer()
+// BluetoothRemoteGATTService: ƒ BluetoothRemoteGATTService()
+// BluetoothUUID: ƒ BluetoothUUID()
+// Boolean: ƒ Boolean()
+// BroadcastChannel: ƒ BroadcastChannel()
+// ByteLengthQueuingStrategy: ƒ ByteLengthQueuingStrategy()
+// CDATASection: ƒ CDATASection()
+// CSS: CSS {Hz: ƒ, Q: ƒ, ch: ƒ, cm: ƒ, deg: ƒ, …}
+// CSSAnimation: ƒ CSSAnimation()
+// CSSConditionRule: ƒ CSSConditionRule()
+// CSSFontFaceRule: ƒ CSSFontFaceRule()
+// CSSGroupingRule: ƒ CSSGroupingRule()
+// CSSImageValue: ƒ CSSImageValue()
+// CSSImportRule: ƒ CSSImportRule()
+// CSSKeyframeRule: ƒ CSSKeyframeRule()
+// CSSKeyframesRule: ƒ CSSKeyframesRule()
+// CSSKeywordValue: ƒ CSSKeywordValue()
+// CSSMathInvert: ƒ CSSMathInvert()
+// CSSMathMax: ƒ CSSMathMax()
+// CSSMathMin: ƒ CSSMathMin()
+// CSSMathNegate: ƒ CSSMathNegate()
+// CSSMathProduct: ƒ CSSMathProduct()
+// CSSMathSum: ƒ CSSMathSum()
+// CSSMathValue: ƒ CSSMathValue()
+// CSSMatrixComponent: ƒ CSSMatrixComponent()
+// CSSMediaRule: ƒ CSSMediaRule()
+// CSSNamespaceRule: ƒ CSSNamespaceRule()
+// CSSNumericArray: ƒ CSSNumericArray()
+// CSSNumericValue: ƒ CSSNumericValue()
+// CSSPageRule: ƒ CSSPageRule()
+// CSSPerspective: ƒ CSSPerspective()
+// CSSPositionValue: ƒ CSSPositionValue()
+// CSSPropertyRule: ƒ CSSPropertyRule()
+// CSSRotate: ƒ CSSRotate()
+// CSSRule: ƒ CSSRule()
+// CSSRuleList: ƒ CSSRuleList()
+// CSSScale: ƒ CSSScale()
+// CSSSkew: ƒ CSSSkew()
+// CSSSkewX: ƒ CSSSkewX()
+// CSSSkewY: ƒ CSSSkewY()
+// CSSStyleDeclaration: ƒ CSSStyleDeclaration()
+// CSSStyleRule: ƒ CSSStyleRule()
+// CSSStyleSheet: ƒ CSSStyleSheet()
+// CSSStyleValue: ƒ CSSStyleValue()
+// CSSSupportsRule: ƒ CSSSupportsRule()
+// CSSTransformComponent: ƒ CSSTransformComponent()
+// CSSTransformValue: ƒ CSSTransformValue()
+// CSSTransition: ƒ CSSTransition()
+// CSSTranslate: ƒ CSSTranslate()
+// CSSUnitValue: ƒ CSSUnitValue()
+// CSSUnparsedValue: ƒ CSSUnparsedValue()
+// CSSVariableReferenceValue: ƒ CSSVariableReferenceValue()
+// Cache: ƒ Cache()
+// CacheStorage: ƒ CacheStorage()
+// CanvasCaptureMediaStreamTrack: ƒ CanvasCaptureMediaStreamTrack()
+// CanvasGradient: ƒ CanvasGradient()
+// CanvasPattern: ƒ CanvasPattern()
+// CanvasRenderingContext2D: ƒ CanvasRenderingContext2D()
+// ChannelMergerNode: ƒ ChannelMergerNode()
+// ChannelSplitterNode: ƒ ChannelSplitterNode()
+// CharacterData: ƒ CharacterData()
+// Clipboard: ƒ Clipboard()
+// ClipboardEvent: ƒ ClipboardEvent()
+// ClipboardItem: ƒ ClipboardItem()
+// CloseEvent: ƒ CloseEvent()
+// Comment: ƒ Comment()
+// CompositionEvent: ƒ CompositionEvent()
+// CompressionStream: ƒ CompressionStream()
+// ConstantSourceNode: ƒ ConstantSourceNode()
+// ConvolverNode: ƒ ConvolverNode()
+// CookieChangeEvent: ƒ CookieChangeEvent()
+// CookieStore: ƒ CookieStore()
+// CookieStoreManager: ƒ CookieStoreManager()
+// CountQueuingStrategy: ƒ CountQueuingStrategy()
+// Credential: ƒ Credential()
+// CredentialsContainer: ƒ CredentialsContainer()
+// Crypto: ƒ Crypto()
+// CryptoKey: ƒ CryptoKey()
+// CustomElementRegistry: ƒ CustomElementRegistry()
+// CustomEvent: ƒ CustomEvent()
+// DOMError: ƒ DOMError()
+// DOMException: ƒ DOMException()
+// DOMImplementation: ƒ DOMImplementation()
+// DOMMatrix: ƒ DOMMatrix()
+// DOMMatrixReadOnly: ƒ DOMMatrixReadOnly()
+// DOMParser: ƒ DOMParser()
+// DOMPoint: ƒ DOMPoint()
+// DOMPointReadOnly: ƒ DOMPointReadOnly()
+// DOMQuad: ƒ DOMQuad()
+// DOMRect: ƒ DOMRect()
+// DOMRectList: ƒ DOMRectList()
+// DOMRectReadOnly: ƒ DOMRectReadOnly()
+// DOMStringList: ƒ DOMStringList()
+// DOMStringMap: ƒ DOMStringMap()
+// DOMTokenList: ƒ DOMTokenList()
+// DataTransfer: ƒ DataTransfer()
+// DataTransferItem: ƒ DataTransferItem()
+// DataTransferItemList: ƒ DataTransferItemList()
+// DataView: ƒ DataView()
+// Date: ƒ Date()
+// DecompressionStream: ƒ DecompressionStream()
+// DelayNode: ƒ DelayNode()
+// DeviceMotionEvent: ƒ DeviceMotionEvent()
+// DeviceMotionEventAcceleration: ƒ DeviceMotionEventAcceleration()
+// DeviceMotionEventRotationRate: ƒ DeviceMotionEventRotationRate()
+// DeviceOrientationEvent: ƒ DeviceOrientationEvent()
+// Document: ƒ Document()
+// DocumentFragment: ƒ DocumentFragment()
+// DocumentTimeline: ƒ DocumentTimeline()
+// DocumentType: ƒ DocumentType()
+// DragEvent: ƒ DragEvent()
+// DynamicsCompressorNode: ƒ DynamicsCompressorNode()
+// Element: ƒ Element()
+// ElementInternals: ƒ ElementInternals()
+// Error: ƒ Error()
+// ErrorEvent: ƒ ErrorEvent()
+// EvalError: ƒ EvalError()
+// Event: ƒ Event()
+// EventCounts: ƒ EventCounts()
+// EventSource: ƒ EventSource()
+// EventTarget: ƒ EventTarget()
+// External: ƒ External()
+// FeaturePolicy: ƒ FeaturePolicy()
+// FederatedCredential: ƒ FederatedCredential()
+// File: ƒ File()
+// FileList: ƒ FileList()
+// FileReader: ƒ FileReader()
+// FileSystemDirectoryHandle: ƒ FileSystemDirectoryHandle()
+// FileSystemFileHandle: ƒ FileSystemFileHandle()
+// FileSystemHandle: ƒ FileSystemHandle()
+// FileSystemWritableFileStream: ƒ FileSystemWritableFileStream()
+// FinalizationRegistry: ƒ FinalizationRegistry()
+// Float32Array: ƒ Float32Array()
+// Float64Array: ƒ Float64Array()
+// FocusEvent: ƒ FocusEvent()
+// FontFace: ƒ FontFace()
+// FontFaceSetLoadEvent: ƒ FontFaceSetLoadEvent()
+// FormData: ƒ FormData()
+// FormDataEvent: ƒ FormDataEvent()
+// FragmentDirective: ƒ FragmentDirective()
+// Function: ƒ Function()
+// GainNode: ƒ GainNode()
+// Gamepad: ƒ Gamepad()
+// GamepadButton: ƒ GamepadButton()
+// GamepadEvent: ƒ GamepadEvent()
+// GamepadHapticActuator: ƒ GamepadHapticActuator()
+// Geolocation: ƒ Geolocation()
+// GeolocationCoordinates: ƒ GeolocationCoordinates()
+// GeolocationPosition: ƒ GeolocationPosition()
+// GeolocationPositionError: ƒ GeolocationPositionError()
+// Gyroscope: ƒ Gyroscope()
+// HID: ƒ HID()
+// HIDConnectionEvent: ƒ HIDConnectionEvent()
+// HIDDevice: ƒ HIDDevice()
+// HIDInputReportEvent: ƒ HIDInputReportEvent()
+// HTMLAllCollection: ƒ HTMLAllCollection()
+// HTMLAnchorElement: ƒ HTMLAnchorElement()
+// HTMLAreaElement: ƒ HTMLAreaElement()
+// HTMLAudioElement: ƒ HTMLAudioElement()
+// HTMLBRElement: ƒ HTMLBRElement()
+// HTMLBaseElement: ƒ HTMLBaseElement()
+// HTMLBodyElement: ƒ HTMLBodyElement()
+// HTMLButtonElement: ƒ HTMLButtonElement()
+// HTMLCanvasElement: ƒ HTMLCanvasElement()
+// HTMLCollection: ƒ HTMLCollection()
+// HTMLDListElement: ƒ HTMLDListElement()
+// HTMLDataElement: ƒ HTMLDataElement()
+// HTMLDataListElement: ƒ HTMLDataListElement()
+// HTMLDetailsElement: ƒ HTMLDetailsElement()
+// HTMLDialogElement: ƒ HTMLDialogElement()
+// HTMLDirectoryElement: ƒ HTMLDirectoryElement()
+// HTMLDivElement: ƒ HTMLDivElement()
+// HTMLDocument: ƒ HTMLDocument()
+// HTMLElement: ƒ HTMLElement()
+// HTMLEmbedElement: ƒ HTMLEmbedElement()
+// HTMLFieldSetElement: ƒ HTMLFieldSetElement()
+// HTMLFontElement: ƒ HTMLFontElement()
+// HTMLFormControlsCollection: ƒ HTMLFormControlsCollection()
+// HTMLFormElement: ƒ HTMLFormElement()
+// HTMLFrameElement: ƒ HTMLFrameElement()
+// HTMLFrameSetElement: ƒ HTMLFrameSetElement()
+// HTMLHRElement: ƒ HTMLHRElement()
+// HTMLHeadElement: ƒ HTMLHeadElement()
+// HTMLHeadingElement: ƒ HTMLHeadingElement()
+// HTMLHtmlElement: ƒ HTMLHtmlElement()
+// HTMLIFrameElement: ƒ HTMLIFrameElement()
+// HTMLImageElement: ƒ HTMLImageElement()
+// HTMLInputElement: ƒ HTMLInputElement()
+// HTMLLIElement: ƒ HTMLLIElement()
+// HTMLLabelElement: ƒ HTMLLabelElement()
+// HTMLLegendElement: ƒ HTMLLegendElement()
+// HTMLLinkElement: ƒ HTMLLinkElement()
+// HTMLMapElement: ƒ HTMLMapElement()
+// HTMLMarqueeElement: ƒ HTMLMarqueeElement()
+// HTMLMediaElement: ƒ HTMLMediaElement()
+// HTMLMenuElement: ƒ HTMLMenuElement()
+// HTMLMetaElement: ƒ HTMLMetaElement()
+// HTMLMeterElement: ƒ HTMLMeterElement()
+// HTMLModElement: ƒ HTMLModElement()
+// HTMLOListElement: ƒ HTMLOListElement()
+// HTMLObjectElement: ƒ HTMLObjectElement()
+// HTMLOptGroupElement: ƒ HTMLOptGroupElement()
+// HTMLOptionElement: ƒ HTMLOptionElement()
+// HTMLOptionsCollection: ƒ HTMLOptionsCollection()
+// HTMLOutputElement: ƒ HTMLOutputElement()
+// HTMLParagraphElement: ƒ HTMLParagraphElement()
+// HTMLParamElement: ƒ HTMLParamElement()
+// HTMLPictureElement: ƒ HTMLPictureElement()
+// HTMLPreElement: ƒ HTMLPreElement()
+// HTMLProgressElement: ƒ HTMLProgressElement()
+// HTMLQuoteElement: ƒ HTMLQuoteElement()
+// HTMLScriptElement: ƒ HTMLScriptElement()
+// HTMLSelectElement: ƒ HTMLSelectElement()
+// HTMLSlotElement: ƒ HTMLSlotElement()
+// HTMLSourceElement: ƒ HTMLSourceElement()
+// HTMLSpanElement: ƒ HTMLSpanElement()
+// HTMLStyleElement: ƒ HTMLStyleElement()
+// HTMLTableCaptionElement: ƒ HTMLTableCaptionElement()
+// HTMLTableCellElement: ƒ HTMLTableCellElement()
+// HTMLTableColElement: ƒ HTMLTableColElement()
+// HTMLTableElement: ƒ HTMLTableElement()
+// HTMLTableRowElement: ƒ HTMLTableRowElement()
+// HTMLTableSectionElement: ƒ HTMLTableSectionElement()
+// HTMLTemplateElement: ƒ HTMLTemplateElement()
+// HTMLTextAreaElement: ƒ HTMLTextAreaElement()
+// HTMLTimeElement: ƒ HTMLTimeElement()
+// HTMLTitleElement: ƒ HTMLTitleElement()
+// HTMLTrackElement: ƒ HTMLTrackElement()
+// HTMLUListElement: ƒ HTMLUListElement()
+// HTMLUnknownElement: ƒ HTMLUnknownElement()
+// HTMLVideoElement: ƒ HTMLVideoElement()
+// HashChangeEvent: ƒ HashChangeEvent()
+// Headers: ƒ Headers()
+// History: ƒ History()
+// IDBCursor: ƒ IDBCursor()
+// IDBCursorWithValue: ƒ IDBCursorWithValue()
+// IDBDatabase: ƒ IDBDatabase()
+// IDBFactory: ƒ IDBFactory()
+// IDBIndex: ƒ IDBIndex()
+// IDBKeyRange: ƒ IDBKeyRange()
+// IDBObjectStore: ƒ IDBObjectStore()
+// IDBOpenDBRequest: ƒ IDBOpenDBRequest()
+// IDBRequest: ƒ IDBRequest()
+// IDBTransaction: ƒ IDBTransaction()
+// IDBVersionChangeEvent: ƒ IDBVersionChangeEvent()
+// IIRFilterNode: ƒ IIRFilterNode()
+// IdleDeadline: ƒ IdleDeadline()
+// Image: ƒ Image()
+// ImageBitmap: ƒ ImageBitmap()
+// ImageBitmapRenderingContext: ƒ ImageBitmapRenderingContext()
+// ImageCapture: ƒ ImageCapture()
+// ImageData: ƒ ImageData()
+// InputDeviceCapabilities: ƒ InputDeviceCapabilities()
+// InputDeviceInfo: ƒ InputDeviceInfo()
+// InputEvent: ƒ InputEvent()
+// Int8Array: ƒ Int8Array()
+// Int16Array: ƒ Int16Array()
+// Int32Array: ƒ Int32Array()
+// IntersectionObserver: ƒ IntersectionObserver()
+// IntersectionObserverEntry: ƒ IntersectionObserverEntry()
+// Intl: Intl {getCanonicalLocales: ƒ, DateTimeFormat: ƒ, NumberFormat: ƒ, Collator: ƒ, v8BreakIterator: ƒ, …}
+// JSON: JSON {Symbol(Symbol.toStringTag): "JSON", parse: ƒ, stringify: ƒ}
+// Keyboard: ƒ Keyboard()
+// KeyboardEvent: ƒ KeyboardEvent()
+// KeyboardLayoutMap: ƒ KeyboardLayoutMap()
+// KeyframeEffect: ƒ KeyframeEffect()
+// LargestContentfulPaint: ƒ LargestContentfulPaint()
+// LayoutShift: ƒ LayoutShift()
+// LayoutShiftAttribution: ƒ LayoutShiftAttribution()
+// LinearAccelerationSensor: ƒ LinearAccelerationSensor()
+// Location: ƒ Location()
+// Lock: ƒ Lock()
+// LockManager: ƒ LockManager()
+// MIDIAccess: ƒ MIDIAccess()
+// MIDIConnectionEvent: ƒ MIDIConnectionEvent()
+// MIDIInput: ƒ MIDIInput()
+// MIDIInputMap: ƒ MIDIInputMap()
+// MIDIMessageEvent: ƒ MIDIMessageEvent()
+// MIDIOutput: ƒ MIDIOutput()
+// MIDIOutputMap: ƒ MIDIOutputMap()
+// MIDIPort: ƒ MIDIPort()
+// Map: ƒ Map()
+// Math: Math {abs: ƒ, acos: ƒ, acosh: ƒ, asin: ƒ, asinh: ƒ, …}
+// MediaCapabilities: ƒ MediaCapabilities()
+// MediaDeviceInfo: ƒ MediaDeviceInfo()
+// MediaDevices: ƒ MediaDevices()
+// MediaElementAudioSourceNode: ƒ MediaElementAudioSourceNode()
+// MediaEncryptedEvent: ƒ MediaEncryptedEvent()
+// MediaError: ƒ MediaError()
+// MediaKeyMessageEvent: ƒ MediaKeyMessageEvent()
+// MediaKeySession: ƒ MediaKeySession()
+// MediaKeyStatusMap: ƒ MediaKeyStatusMap()
+// MediaKeySystemAccess: ƒ MediaKeySystemAccess()
+// MediaKeys: ƒ MediaKeys()
+// MediaList: ƒ MediaList()
+// MediaMetadata: ƒ MediaMetadata()
+// MediaQueryList: ƒ MediaQueryList()
+// MediaQueryListEvent: ƒ MediaQueryListEvent()
+// MediaRecorder: ƒ MediaRecorder()
+// MediaSession: ƒ MediaSession()
+// MediaSource: ƒ MediaSource()
+// MediaStream: ƒ MediaStream()
+// MediaStreamAudioDestinationNode: ƒ MediaStreamAudioDestinationNode()
+// MediaStreamAudioSourceNode: ƒ MediaStreamAudioSourceNode()
+// MediaStreamEvent: ƒ MediaStreamEvent()
+// MediaStreamTrack: ƒ MediaStreamTrack()
+// MediaStreamTrackEvent: ƒ MediaStreamTrackEvent()
+// MessageChannel: ƒ MessageChannel()
+// MessageEvent: ƒ MessageEvent()
+// MessagePort: ƒ MessagePort()
+// MimeType: ƒ MimeType()
+// MimeTypeArray: ƒ MimeTypeArray()
+// MouseEvent: ƒ MouseEvent()
+// MutationEvent: ƒ MutationEvent()
+// MutationObserver: ƒ MutationObserver()
+// MutationRecord: ƒ MutationRecord()
+// NaN: NaN
+// NamedNodeMap: ƒ NamedNodeMap()
+// NavigationPreloadManager: ƒ NavigationPreloadManager()
+// Navigator: ƒ Navigator()
+// NavigatorUAData: ƒ NavigatorUAData()
+// NetworkInformation: ƒ NetworkInformation()
+// Node: ƒ Node()
+// NodeFilter: ƒ NodeFilter()
+// NodeIterator: ƒ NodeIterator()
+// NodeList: ƒ NodeList()
+// Notification: ƒ Notification()
+// Number: ƒ Number()
+// Object: ƒ Object()
+// OfflineAudioCompletionEvent: ƒ OfflineAudioCompletionEvent()
+// OfflineAudioContext: ƒ OfflineAudioContext()
+// OffscreenCanvas: ƒ OffscreenCanvas()
+// OffscreenCanvasRenderingContext2D: ƒ OffscreenCanvasRenderingContext2D()
+// Option: ƒ Option()
+// OrientationSensor: ƒ OrientationSensor()
+// OscillatorNode: ƒ OscillatorNode()
+// OverconstrainedError: ƒ OverconstrainedError()
+// PageTransitionEvent: ƒ PageTransitionEvent()
+// PannerNode: ƒ PannerNode()
+// PasswordCredential: ƒ PasswordCredential()
+// Path2D: ƒ Path2D()
+// PaymentAddress: ƒ PaymentAddress()
+// PaymentInstruments: ƒ PaymentInstruments()
+// PaymentManager: ƒ PaymentManager()
+// PaymentMethodChangeEvent: ƒ PaymentMethodChangeEvent()
+// PaymentRequest: ƒ PaymentRequest()
+// PaymentRequestUpdateEvent: ƒ PaymentRequestUpdateEvent()
+// PaymentResponse: ƒ PaymentResponse()
+// Performance: ƒ Performance()
+// PerformanceElementTiming: ƒ PerformanceElementTiming()
+// PerformanceEntry: ƒ PerformanceEntry()
+// PerformanceEventTiming: ƒ PerformanceEventTiming()
+// PerformanceLongTaskTiming: ƒ PerformanceLongTaskTiming()
+// PerformanceMark: ƒ PerformanceMark()
+// PerformanceMeasure: ƒ PerformanceMeasure()
+// PerformanceNavigation: ƒ PerformanceNavigation()
+// PerformanceNavigationTiming: ƒ PerformanceNavigationTiming()
+// PerformanceObserver: ƒ PerformanceObserver()
+// PerformanceObserverEntryList: ƒ PerformanceObserverEntryList()
+// PerformancePaintTiming: ƒ PerformancePaintTiming()
+// PerformanceResourceTiming: ƒ PerformanceResourceTiming()
+// PerformanceServerTiming: ƒ PerformanceServerTiming()
+// PerformanceTiming: ƒ PerformanceTiming()
+// PeriodicSyncManager: ƒ PeriodicSyncManager()
+// PeriodicWave: ƒ PeriodicWave()
+// PermissionStatus: ƒ PermissionStatus()
+// Permissions: ƒ Permissions()
+// PictureInPictureEvent: ƒ PictureInPictureEvent()
+// PictureInPictureWindow: ƒ PictureInPictureWindow()
+// Plugin: ƒ Plugin()
+// PluginArray: ƒ PluginArray()
+// PointerEvent: ƒ PointerEvent()
+// PopStateEvent: ƒ PopStateEvent()
+// Presentation: ƒ Presentation()
+// PresentationAvailability: ƒ PresentationAvailability()
+// PresentationConnection: ƒ PresentationConnection()
+// PresentationConnectionAvailableEvent: ƒ PresentationConnectionAvailableEvent()
+// PresentationConnectionCloseEvent: ƒ PresentationConnectionCloseEvent()
+// PresentationConnectionList: ƒ PresentationConnectionList()
+// PresentationReceiver: ƒ PresentationReceiver()
+// PresentationRequest: ƒ PresentationRequest()
+// ProcessingInstruction: ƒ ProcessingInstruction()
+// ProgressEvent: ƒ ProgressEvent()
+// Promise: ƒ Promise()
+// PromiseRejectionEvent: ƒ PromiseRejectionEvent()
+// Proxy: ƒ Proxy()
+// PublicKeyCredential: ƒ PublicKeyCredential()
+// PushManager: ƒ PushManager()
+// PushSubscription: ƒ PushSubscription()
+// PushSubscriptionOptions: ƒ PushSubscriptionOptions()
+// RTCCertificate: ƒ RTCCertificate()
+// RTCDTMFSender: ƒ RTCDTMFSender()
+// RTCDTMFToneChangeEvent: ƒ RTCDTMFToneChangeEvent()
+// RTCDataChannel: ƒ RTCDataChannel()
+// RTCDataChannelEvent: ƒ RTCDataChannelEvent()
+// RTCDtlsTransport: ƒ RTCDtlsTransport()
+// RTCEncodedAudioFrame: ƒ RTCEncodedAudioFrame()
+// RTCEncodedVideoFrame: ƒ RTCEncodedVideoFrame()
+// RTCError: ƒ RTCError()
+// RTCErrorEvent: ƒ RTCErrorEvent()
+// RTCIceCandidate: ƒ RTCIceCandidate()
+// RTCIceTransport: ƒ RTCIceTransport()
+// RTCPeerConnection: ƒ RTCPeerConnection()
+// RTCPeerConnectionIceErrorEvent: ƒ RTCPeerConnectionIceErrorEvent()
+// RTCPeerConnectionIceEvent: ƒ RTCPeerConnectionIceEvent()
+// RTCRtpReceiver: ƒ RTCRtpReceiver()
+// RTCRtpSender: ƒ RTCRtpSender()
+// RTCRtpTransceiver: ƒ RTCRtpTransceiver()
+// RTCSctpTransport: ƒ RTCSctpTransport()
+// RTCSessionDescription: ƒ RTCSessionDescription()
+// RTCStatsReport: ƒ RTCStatsReport()
+// RTCTrackEvent: ƒ RTCTrackEvent()
+// RadioNodeList: ƒ RadioNodeList()
+// Range: ƒ Range()
+// RangeError: ƒ RangeError()
+// ReadableByteStreamController: ƒ ReadableByteStreamController()
+// ReadableStream: ƒ ReadableStream()
+// ReadableStreamBYOBReader: ƒ ReadableStreamBYOBReader()
+// ReadableStreamBYOBRequest: ƒ ReadableStreamBYOBRequest()
+// ReadableStreamDefaultController: ƒ ReadableStreamDefaultController()
+// ReadableStreamDefaultReader: ƒ ReadableStreamDefaultReader()
+// ReferenceError: ƒ ReferenceError()
+// Reflect: Reflect {defineProperty: ƒ, deleteProperty: ƒ, apply: ƒ, construct: ƒ, get: ƒ, …}
+// RegExp: ƒ RegExp()
+// RelativeOrientationSensor: ƒ RelativeOrientationSensor()
+// RemotePlayback: ƒ RemotePlayback()
+// ReportingObserver: ƒ ReportingObserver()
+// Request: ƒ Request()
+// ResizeObserver: ƒ ResizeObserver()
+// ResizeObserverEntry: ƒ ResizeObserverEntry()
+// ResizeObserverSize: ƒ ResizeObserverSize()
+// Response: ƒ Response()
+// SVGAElement: ƒ SVGAElement()
+// SVGAngle: ƒ SVGAngle()
+// SVGAnimateElement: ƒ SVGAnimateElement()
+// SVGAnimateMotionElement: ƒ SVGAnimateMotionElement()
+// SVGAnimateTransformElement: ƒ SVGAnimateTransformElement()
+// SVGAnimatedAngle: ƒ SVGAnimatedAngle()
+// SVGAnimatedBoolean: ƒ SVGAnimatedBoolean()
+// SVGAnimatedEnumeration: ƒ SVGAnimatedEnumeration()
+// SVGAnimatedInteger: ƒ SVGAnimatedInteger()
+// SVGAnimatedLength: ƒ SVGAnimatedLength()
+// SVGAnimatedLengthList: ƒ SVGAnimatedLengthList()
+// SVGAnimatedNumber: ƒ SVGAnimatedNumber()
+// SVGAnimatedNumberList: ƒ SVGAnimatedNumberList()
+// SVGAnimatedPreserveAspectRatio: ƒ SVGAnimatedPreserveAspectRatio()
+// SVGAnimatedRect: ƒ SVGAnimatedRect()
+// SVGAnimatedString: ƒ SVGAnimatedString()
+// SVGAnimatedTransformList: ƒ SVGAnimatedTransformList()
+// SVGAnimationElement: ƒ SVGAnimationElement()
+// SVGCircleElement: ƒ SVGCircleElement()
+// SVGClipPathElement: ƒ SVGClipPathElement()
+// SVGComponentTransferFunctionElement: ƒ SVGComponentTransferFunctionElement()
+// SVGDefsElement: ƒ SVGDefsElement()
+// SVGDescElement: ƒ SVGDescElement()
+// SVGElement: ƒ SVGElement()
+// SVGEllipseElement: ƒ SVGEllipseElement()
+// SVGFEBlendElement: ƒ SVGFEBlendElement()
+// SVGFEColorMatrixElement: ƒ SVGFEColorMatrixElement()
+// SVGFEComponentTransferElement: ƒ SVGFEComponentTransferElement()
+// SVGFECompositeElement: ƒ SVGFECompositeElement()
+// SVGFEConvolveMatrixElement: ƒ SVGFEConvolveMatrixElement()
+// SVGFEDiffuseLightingElement: ƒ SVGFEDiffuseLightingElement()
+// SVGFEDisplacementMapElement: ƒ SVGFEDisplacementMapElement()
+// SVGFEDistantLightElement: ƒ SVGFEDistantLightElement()
+// SVGFEDropShadowElement: ƒ SVGFEDropShadowElement()
+// SVGFEFloodElement: ƒ SVGFEFloodElement()
+// SVGFEFuncAElement: ƒ SVGFEFuncAElement()
+// SVGFEFuncBElement: ƒ SVGFEFuncBElement()
+// SVGFEFuncGElement: ƒ SVGFEFuncGElement()
+// SVGFEFuncRElement: ƒ SVGFEFuncRElement()
+// SVGFEGaussianBlurElement: ƒ SVGFEGaussianBlurElement()
+// SVGFEImageElement: ƒ SVGFEImageElement()
+// SVGFEMergeElement: ƒ SVGFEMergeElement()
+// SVGFEMergeNodeElement: ƒ SVGFEMergeNodeElement()
+// SVGFEMorphologyElement: ƒ SVGFEMorphologyElement()
+// SVGFEOffsetElement: ƒ SVGFEOffsetElement()
+// SVGFEPointLightElement: ƒ SVGFEPointLightElement()
+// SVGFESpecularLightingElement: ƒ SVGFESpecularLightingElement()
+// SVGFESpotLightElement: ƒ SVGFESpotLightElement()
+// SVGFETileElement: ƒ SVGFETileElement()
+// SVGFETurbulenceElement: ƒ SVGFETurbulenceElement()
+// SVGFilterElement: ƒ SVGFilterElement()
+// SVGForeignObjectElement: ƒ SVGForeignObjectElement()
+// SVGGElement: ƒ SVGGElement()
+// SVGGeometryElement: ƒ SVGGeometryElement()
+// SVGGradientElement: ƒ SVGGradientElement()
+// SVGGraphicsElement: ƒ SVGGraphicsElement()
+// SVGImageElement: ƒ SVGImageElement()
+// SVGLength: ƒ SVGLength()
+// SVGLengthList: ƒ SVGLengthList()
+// SVGLineElement: ƒ SVGLineElement()
+// SVGLinearGradientElement: ƒ SVGLinearGradientElement()
+// SVGMPathElement: ƒ SVGMPathElement()
+// SVGMarkerElement: ƒ SVGMarkerElement()
+// SVGMaskElement: ƒ SVGMaskElement()
+// SVGMatrix: ƒ SVGMatrix()
+// SVGMetadataElement: ƒ SVGMetadataElement()
+// SVGNumber: ƒ SVGNumber()
+// SVGNumberList: ƒ SVGNumberList()
+// SVGPathElement: ƒ SVGPathElement()
+// SVGPatternElement: ƒ SVGPatternElement()
+// SVGPoint: ƒ SVGPoint()
+// SVGPointList: ƒ SVGPointList()
+// SVGPolygonElement: ƒ SVGPolygonElement()
+// SVGPolylineElement: ƒ SVGPolylineElement()
+// SVGPreserveAspectRatio: ƒ SVGPreserveAspectRatio()
+// SVGRadialGradientElement: ƒ SVGRadialGradientElement()
+// SVGRect: ƒ SVGRect()
+// SVGRectElement: ƒ SVGRectElement()
+// SVGSVGElement: ƒ SVGSVGElement()
+// SVGScriptElement: ƒ SVGScriptElement()
+// SVGSetElement: ƒ SVGSetElement()
+// SVGStopElement: ƒ SVGStopElement()
+// SVGStringList: ƒ SVGStringList()
+// SVGStyleElement: ƒ SVGStyleElement()
+// SVGSwitchElement: ƒ SVGSwitchElement()
+// SVGSymbolElement: ƒ SVGSymbolElement()
+// SVGTSpanElement: ƒ SVGTSpanElement()
+// SVGTextContentElement: ƒ SVGTextContentElement()
+// SVGTextElement: ƒ SVGTextElement()
+// SVGTextPathElement: ƒ SVGTextPathElement()
+// SVGTextPositioningElement: ƒ SVGTextPositioningElement()
+// SVGTitleElement: ƒ SVGTitleElement()
+// SVGTransform: ƒ SVGTransform()
+// SVGTransformList: ƒ SVGTransformList()
+// SVGUnitTypes: ƒ SVGUnitTypes()
+// SVGUseElement: ƒ SVGUseElement()
+// SVGViewElement: ƒ SVGViewElement()
+// Scheduling: ƒ Scheduling()
+// Screen: ƒ Screen()
+// ScreenOrientation: ƒ ScreenOrientation()
+// ScriptProcessorNode: ƒ ScriptProcessorNode()
+// SecurityPolicyViolationEvent: ƒ SecurityPolicyViolationEvent()
+// Selection: ƒ Selection()
+// Sensor: ƒ Sensor()
+// SensorErrorEvent: ƒ SensorErrorEvent()
+// Serial: ƒ Serial()
+// SerialPort: ƒ SerialPort()
+// ServiceWorker: ƒ ServiceWorker()
+// ServiceWorkerContainer: ƒ ServiceWorkerContainer()
+// ServiceWorkerRegistration: ƒ ServiceWorkerRegistration()
+// Set: ƒ Set()
+// ShadowRoot: ƒ ShadowRoot()
+// SharedArrayBuffer: ƒ SharedArrayBuffer()
+// SharedWorker: ƒ SharedWorker()
+// SourceBuffer: ƒ SourceBuffer()
+// SourceBufferList: ƒ SourceBufferList()
+// SpeechSynthesisErrorEvent: ƒ SpeechSynthesisErrorEvent()
+// SpeechSynthesisEvent: ƒ SpeechSynthesisEvent()
+// SpeechSynthesisUtterance: ƒ SpeechSynthesisUtterance()
+// StaticRange: ƒ StaticRange()
+// StereoPannerNode: ƒ StereoPannerNode()
+// Storage: ƒ Storage()
+// StorageEvent: ƒ StorageEvent()
+// StorageManager: ƒ StorageManager()
+// String: ƒ String()
+// StylePropertyMap: ƒ StylePropertyMap()
+// StylePropertyMapReadOnly: ƒ StylePropertyMapReadOnly()
+// StyleSheet: ƒ StyleSheet()
+// StyleSheetList: ƒ StyleSheetList()
+// SubmitEvent: ƒ SubmitEvent()
+// SubtleCrypto: ƒ SubtleCrypto()
+// Symbol: ƒ Symbol()
+// SyncManager: ƒ SyncManager()
+// SyntaxError: ƒ SyntaxError()
+// TaskAttributionTiming: ƒ TaskAttributionTiming()
+// Text: ƒ Text()
+// TextDecoder: ƒ TextDecoder()
+// TextDecoderStream: ƒ TextDecoderStream()
+// TextEncoder: ƒ TextEncoder()
+// TextEncoderStream: ƒ TextEncoderStream()
+// TextEvent: ƒ TextEvent()
+// TextMetrics: ƒ TextMetrics()
+// TextTrack: ƒ TextTrack()
+// TextTrackCue: ƒ TextTrackCue()
+// TextTrackCueList: ƒ TextTrackCueList()
+// TextTrackList: ƒ TextTrackList()
+// TimeRanges: ƒ TimeRanges()
+// Touch: ƒ Touch()
+// TouchEvent: ƒ TouchEvent()
+// TouchList: ƒ TouchList()
+// TrackEvent: ƒ TrackEvent()
+// TransformStream: ƒ TransformStream()
+// TransitionEvent: ƒ TransitionEvent()
+// TreeWalker: ƒ TreeWalker()
+// TrustedHTML: ƒ TrustedHTML()
+// TrustedScript: ƒ TrustedScript()
+// TrustedScriptURL: ƒ TrustedScriptURL()
+// TrustedTypePolicy: ƒ TrustedTypePolicy()
+// TrustedTypePolicyFactory: ƒ TrustedTypePolicyFactory()
+// TypeError: ƒ TypeError()
+// UIEvent: ƒ UIEvent()
+// URIError: ƒ URIError()
+// URL: ƒ URL()
+// URLSearchParams: ƒ URLSearchParams()
+// USB: ƒ USB()
+// USBAlternateInterface: ƒ USBAlternateInterface()
+// USBConfiguration: ƒ USBConfiguration()
+// USBConnectionEvent: ƒ USBConnectionEvent()
+// USBDevice: ƒ USBDevice()
+// USBEndpoint: ƒ USBEndpoint()
+// USBInTransferResult: ƒ USBInTransferResult()
+// USBInterface: ƒ USBInterface()
+// USBIsochronousInTransferPacket: ƒ USBIsochronousInTransferPacket()
+// USBIsochronousInTransferResult: ƒ USBIsochronousInTransferResult()
+// USBIsochronousOutTransferPacket: ƒ USBIsochronousOutTransferPacket()
+// USBIsochronousOutTransferResult: ƒ USBIsochronousOutTransferResult()
+// USBOutTransferResult: ƒ USBOutTransferResult()
+// Uint8Array: ƒ Uint8Array()
+// Uint8ClampedArray: ƒ Uint8ClampedArray()
+// Uint16Array: ƒ Uint16Array()
+// Uint32Array: ƒ Uint32Array()
+// UserActivation: ƒ UserActivation()
+// VTTCue: ƒ VTTCue()
+// ValidityState: ƒ ValidityState()
+// VideoPlaybackQuality: ƒ VideoPlaybackQuality()
+// VisualViewport: ƒ VisualViewport()
+// WakeLock: ƒ WakeLock()
+// WakeLockSentinel: ƒ WakeLockSentinel()
+// WaveShaperNode: ƒ WaveShaperNode()
+// WeakMap: ƒ WeakMap()
+// WeakRef: ƒ WeakRef()
+// WeakSet: ƒ WeakSet()
+// WebAssembly: WebAssembly {compile: ƒ, validate: ƒ, instantiate: ƒ, compileStreaming: ƒ, instantiateStreaming: ƒ, …}
+// WebGL2RenderingContext: ƒ WebGL2RenderingContext()
+// WebGLActiveInfo: ƒ WebGLActiveInfo()
+// WebGLBuffer: ƒ WebGLBuffer()
+// WebGLContextEvent: ƒ WebGLContextEvent()
+// WebGLFramebuffer: ƒ WebGLFramebuffer()
+// WebGLProgram: ƒ WebGLProgram()
+// WebGLQuery: ƒ WebGLQuery()
+// WebGLRenderbuffer: ƒ WebGLRenderbuffer()
+// WebGLRenderingContext: ƒ WebGLRenderingContext()
+// WebGLSampler: ƒ WebGLSampler()
+// WebGLShader: ƒ WebGLShader()
+// WebGLShaderPrecisionFormat: ƒ WebGLShaderPrecisionFormat()
+// WebGLSync: ƒ WebGLSync()
+// WebGLTexture: ƒ WebGLTexture()
+// WebGLTransformFeedback: ƒ WebGLTransformFeedback()
+// WebGLUniformLocation: ƒ WebGLUniformLocation()
+// WebGLVertexArrayObject: ƒ WebGLVertexArrayObject()
+// WebKitCSSMatrix: ƒ DOMMatrix()
+// WebKitMutationObserver: ƒ MutationObserver()
+// WebSocket: ƒ WebSocket()
+// WheelEvent: ƒ WheelEvent()
+// Window: ƒ Window()
+// Worker: ƒ Worker()
+// Worklet: ƒ Worklet()
+// WritableStream: ƒ WritableStream()
+// WritableStreamDefaultWriter: ƒ WritableStreamDefaultWriter()
+// XMLDocument: ƒ XMLDocument()
+// XMLHttpRequest: ƒ XMLHttpRequest()
+// XMLHttpRequestEventTarget: ƒ XMLHttpRequestEventTarget()
+// XMLHttpRequestUpload: ƒ XMLHttpRequestUpload()
+// XMLSerializer: ƒ XMLSerializer()
+// XPathEvaluator: ƒ XPathEvaluator()
+// XPathExpression: ƒ XPathExpression()
+// XPathResult: ƒ XPathResult()
+// XRAnchor: ƒ XRAnchor()
+// XRAnchorSet: ƒ XRAnchorSet()
+// XRBoundedReferenceSpace: ƒ XRBoundedReferenceSpace()
+// XRDOMOverlayState: ƒ XRDOMOverlayState()
+// XRFrame: ƒ XRFrame()
+// XRHitTestResult: ƒ XRHitTestResult()
+// XRHitTestSource: ƒ XRHitTestSource()
+// XRInputSource: ƒ XRInputSource()
+// XRInputSourceArray: ƒ XRInputSourceArray()
+// XRInputSourceEvent: ƒ XRInputSourceEvent()
+// XRInputSourcesChangeEvent: ƒ XRInputSourcesChangeEvent()
+// XRLayer: ƒ XRLayer()
+// XRPose: ƒ XRPose()
+// XRRay: ƒ XRRay()
+// XRReferenceSpace: ƒ XRReferenceSpace()
+// XRReferenceSpaceEvent: ƒ XRReferenceSpaceEvent()
+// XRRenderState: ƒ XRRenderState()
+// XRRigidTransform: ƒ XRRigidTransform()
+// XRSession: ƒ XRSession()
+// XRSessionEvent: ƒ XRSessionEvent()
+// XRSpace: ƒ XRSpace()
+// XRSystem: ƒ XRSystem()
+// XRTransientInputHitTestResult: ƒ XRTransientInputHitTestResult()
+// XRTransientInputHitTestSource: ƒ XRTransientInputHitTestSource()
+// XRView: ƒ XRView()
+// XRViewerPose: ƒ XRViewerPose()
+// XRViewport: ƒ XRViewport()
+// XRWebGLBinding: ƒ XRWebGLBinding()
+// XRWebGLLayer: ƒ XRWebGLLayer()
+// XSLTProcessor: ƒ XSLTProcessor()
+// console: console {debug: ƒ, error: ƒ, info: ƒ, log: ƒ, warn: ƒ, …}
+// decodeURI: ƒ decodeURI()
+// decodeURIComponent: ƒ decodeURIComponent()
+// encodeURI: ƒ encodeURI()
+// encodeURIComponent: ƒ encodeURIComponent()
+// escape: ƒ escape()
+// eval: ƒ eval()
+// event: undefined
+// globalThis: Window {window: Window, self: Window, document: document, name: "유병승", location: Location, …}
+// isFinite: ƒ isFinite()
+// isNaN: ƒ isNaN()
+// offscreenBuffering: true
+// parseFloat: ƒ parseFloat()
+// parseInt: ƒ parseInt()
+// undefined: undefined
+// unescape: ƒ unescape()
+// webkitMediaStream: ƒ MediaStream()
+// webkitRTCPeerConnection: ƒ RTCPeerConnection()
+// webkitSpeechGrammar: ƒ SpeechGrammar()
+// webkitSpeechGrammarList: ƒ SpeechGrammarList()
+// webkitSpeechRecognition: ƒ SpeechRecognition()
+// webkitSpeechRecognitionError: ƒ SpeechRecognitionErrorEvent()
+// webkitSpeechRecognitionEvent: ƒ SpeechRecognitionEvent()
+// webkitURL: ƒ URL()
+// __proto__: Window
+
+
+
+
+
+//이런식으로 변수가 전역으로 선언된다.
+        //scope chaining 이란??
+
+            var zvartest = "첫 번째 선언"
+            console.log(zvartest);
+            </script>
+
+            
+
+
+            <pre>
+                변수를 선언 시에 주의할 점!
+                변수를 중복으로 선언하면??
+                > java : dulplicated variable
+                > JS : 에러 출력 안 됨  그냥 덮어써버림
+                > 변수 중복에 대해서 잘 체킹을 해야했는데.. EcmaScript6에서는 변경됐다..
+
+
+
+            </pre>
+
+            <script>
+                var zvartest = "두 번째 선언" // 원래는 중복값 체크 안 해줘서 분기처리 했어야함
+                console.log(zvartest);
+
+                //이렇게 하면 어떻게 되나???
+                address = "경기도 시흥시";
+                // 선언도 안 했는데 값을 넣는다. 
+                console.log(address);
+                //이게 참조형이고 값에 따라 타입을 잡으니까 가능하지 ㅋㅋ
+                //근데 이거 개불편하겠다.
+                
+                function notVar(){
+                    email = "newkayak12@gmail.com";
+                }
+                notVar();
+                console.log(email);
+                // 이게 잡히네 이러면 그냥 global scope에 만들어서 집어 넣나봄 미친
+                // 이게 언어야? 개판이네 ㅋㅋ
+            </script>
+
+            <pre>
+                es6에 와서 변수를 선언하는 예약어를 추가
+                블록스코프를 유지하고, 중복 선언하는 방지하는 기능을 추가
+
+                let/ const예약어를 사용해서 변수를 선언하게 만듦
+
+                let : 블록스코프 영역을 가지는 변수를 선언할 때
+                const : 상수를 사용할 떄 (static final)
+
+
+            </pre>
+
+
+            <script>
+                let name2 = "유병승";
+                let name3 = "김지한";
+                console.log(name2);  
+// Uncaught SyntaxError: Identifier 'name2' has already been declared
+                    if(name2 == "유병승"){
+                        let phone = "010";
+                        console.log(phone);
+
+// let이 block scope가 적용되서 바깥으로 못 나감
+                    }
+                // console.log(phone);
+        // 에러나면 읽다가 마니까 에러는 항상 처리. 에러 난 곳 밑으로 안 읽음
+                
+                name3 = "호호호";
+// 이거는 값을 바꾸는거니까 가능하겠지
+                console.log(name3);
+
+
+
+
+// const는 불변의 값(상수)
+                const nickname = "유뱅";
+                console.log(nickname);
+                
+                // nickname = "유병승";
+                // console.log(nickname);
+// Uncaught TypeError: Assignment to constant variable.
+// 상수_ 못 바꿈.
+
+
+                    for(let i1=0; i1<10; i1++){
+                        console.log(i1);
+                    };
+
+                // console.log(i1);
+    /* Uncaught ReferenceError: i1 is not defined at */
+
+
+            </script>
+
+
+
+            <h2>자바스크립트 자료형</h2>
+            <pre>
+                타입을 지정하지 않는다고해서 자료형이 없는게 아니에요
+                변수에 리터럴 값이 주입 될 때 타입이 결정된다.
+
+                자바스크립트는 자료형을 가지고 있으며, 변수의 자료형이 결정되는 것은 
+                변수에 값(리터럴) 대입할 때이다.
+
+                각 자료형을 알아보고, 자료형 리터럴 표현 방법을 알아보자
+                문자열(String), 숫자(number), 배열([]), 객체({}), 함수(function), undefine, Boolean
+
+            </pre>
+
+            <button onclick="testType();">변수 알아보기</button>
+            <div id="container"></div>
+            
+            <script>
+                function testType(){
+                //자료형
+                //string > "" or ''으로 표현
+                    let dog = "bark";
+                    
+                //number > 숫자
+                    let dogAge = 19;
+                    let height = 12.3;
+
+                // boolean > true/ false
+                    let flag = true;
+                    flag = false;
+
+                //배열 > new Array(1,2,3,4,5);
+                //    > [1,2,3,4];
+                    // 이렇게 총 두 가지 방법으로 선언함
+                    let arr = [1,2,3,4];
+                    arr = new Array(1,2,3,4);
+                    // arr의 자료형은 배열... 
+
+
+                //객체 > {key:value, key:value} 얘는 객체가 key:value형식이다.
+                // new 생성자 함수 (값, 값) 이렇게도 할 수 있다.
+
+                    let obj= {name:"유병승", age:19};
+
+
+
+                //함수를 자료형으로 사용
+                // 함수 -> function(){ console.log('유병승');}
+                    let func = function(){
+                        console.log("유병승")
+                    };
+
+                //자바스크립트에서 변수는 유연함
+                    console.log(name);
+                    name = age;
+                    console.log(name);    
+                    name = flag;
+                    console.log(name);
+                // 이게 다 된다... 이러면 안정성 부분에서 좋나?
+                // 안정성 높이려면 분기처리하고 소위 말하는 개지랄을 해야하잖아...
+                //  이건 형변환 개념이 아니라 그냥 주소값에 있는 값에 맞춰서 변수 타입을 바꿔주는 성격 때문에 캐스팅처럼 보이는 것일 뿐...
+
+
+                // 이 X같은 것 떄문에 변수에 무슨 값이 들어가있는지 확인해야겠지
+                }
+            </script>
+            <h3>변수의 타입 확인하기</h3>
+            <pre>
+                typeof라는 함수를 이용하면 타입을 알 수 있다.
+                typeof(변수명) / typeof 변수명 (instanceof)
+            </pre>
+            
+                <button onclick="typeTest2();"> type of 이용 </button> 
+
+            <script>
+                
+                function typeTest2(){
+                    
+                    let tmp = "유병승";
+                    console.log("tmp : "+ tmp +" 자료형 : " +typeof tmp)
+                // tmp : 유병승 자료형 : string
+                    
+                    tmp = 1082.2;
+                    console.log("tmp : "+ tmp +" 자료형 : " +typeof tmp)
+                // tmp : 1082.2 자료형 : number
+                    
+                    tmp = true;
+                    console.log("tmp : "+ tmp +" 자료형 : " +typeof tmp)
+                // tmp : true 자료형 : boolean
+
+                    tmp = new Array(1,2,3,4);
+                    console.log("tmp : "+ tmp +" 자료형 : " +typeof tmp)
+                // tmp : 1,2,3,4 자료형 : object
+
+                    tmp = {name:"유뱅", age : 10, height : 192.2};
+                    console.log("tmp : "+ tmp +" 자료형 : " +typeof tmp)
+                // tmp : [object Object] 자료형 : object
+
+                    tmp = function(){console.log("19")};
+                    console.log("tmp : "+ tmp +" 자료형 : " +typeof tmp)
+                // tmp : function(){console.log("19")} 자료형 : function
+                    
+                    
+                    console.log("temp : "+ temp +" 자료형 : " +typeof temp)
+                // 초기화도 안 해서 undefine 
+                
+                }
+
+
+            </script>
+
+
+
+        </body>
+
+ </html>

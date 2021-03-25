@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>casting</title>
+        </head>
+        <body>
+            <script>
+                // 문자를 숫자로
+                // Number()
+                let nsu=19;
+                let stsu = "19";
+
+                console.log(nsu, typeof nsu, stsu,  typeof stsu);
+                console.log(nsu+Number(stsu));
+
+                // ParseInt()
+                // 숫자만 읽네
+                let str = "11122살";
+                let npt = 22
+                let par = parseInt(str);
+                console.log(par, typeof par);
+                console.log(npt+par);
+
+                // 숫자를 문자로
+                let su =19;
+                let name = "병승";
+                console.log( su+name, typeof (su+name) );
+                console.log( su, typeof su);
+                console.log(su.toString(), typeof(su.toString()));
+
+            </script>
+
+
+
+            <input type="number" id="num1">
+            <input type="number" id="num2">
+            <button onclick="sum();">계산</button> <span id="resul"></span>
+            <script>    
+
+                function sum(){
+                    let num1 = document.getElementById("num1");
+                    let num2 = document.getElementById("num2");
+                    let re = document.getElementById("resul");
+                    re.innerHTML = Number(num1.value) + Number(num2.value);
+                    
+
+
+                }
+            </script>
+        </body>
+    </html>

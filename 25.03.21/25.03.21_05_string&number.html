@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>string & number</title>
+            
+        </head>
+        <body>
+            <h1>string 객체 함수 활용하기 (내장 함수)</h1>   
+            
+            <script>
+                //  1. 영문자를 대문자, 소문자로 처리하는 함수 : toUpperCase(), toLowerCase()
+                console.log('abc'.toUpperCase());
+                console.log('ABC'.toLowerCase());
+
+                //  2. 문자열의 길이를 확인하는 함수 : length
+                console.log('rclass'.length);
+
+                //  3. 문자열에서 인덱스에 있는 문자를 출력하는 함수
+                // 인덱스 0부터 시작 sql이 특이했던거
+                console.log('rclass'.charAt(2));
+
+                // 4. 유니코드 값 갖고오기
+                console.log('ABC'.charCodeAt(2));
+
+                // 5. 특정 문자의 위치를 찾는 함수 : indexOf(), lastIndexOf(), 
+                console.log('AbCDbB'.indexOf("b")); //앞에서부터
+                console.log('AbCDbB'.lastIndexOf("b")); //뒤에서부터
+
+                // 6a. 특정 문자를 잘라내는 함수 : substring()
+                console.log('AbCDB'.substring(2,4));
+                console.log('AbCDB'.substr(2,4)); /* 둘이 똑같네 */
+
+                //7. split : split();
+                let names = ' 유병승, 김상현, 김예진, 김지한, 권설영';
+                let arr = names.split(",");
+                    for(let i=0; i<arr.length; i++ )   {
+                        console.log(arr[i]);
+                    }
+                console.log(names);
+                // 유병승, 김상현, 김예진, 김지한, 권설영
+                console.log(arr);
+                // (5) ["유병승", " 김상현", " 김예진", " 김지한", " 권설영"] []는 배열이라고 생각하면 됨
+
+                //8. 문자열에서 일부 문자열을 찾는 함수 : includes()
+                console.log("유병승 천재".includes("천재"));  //java contains
+
+                // 9. 문자열을 특정 문자열로 변경 : replace()
+                console.log("유병승 바보".replace("바보", "천재"));
+
+                // 10. 문자열의 공백을 제거하는 함수 : trim()
+                console.log("   1유병승 바보  ㅋ  ".trim());
+
+            </script>
+            
+
+            <input type="text" name="userId" id="userid" placeholder="아이디는 4글자 이상" onkeyup="checkId();">
+            <span id = "result"></span>
+            <br>
+            <input type="text" name="gender" id="gender" placeholder="성별은 M/F로">
+            <button onclick="checkgender();">성별확인</button>
+           
+           
+            <script>
+                function checkId(){
+                    let input = document.getElementById("userid");
+                    let result = document.getElementById("result");
+                    let value = input.value;
+                    console.log(value);
+                       
+                        if(value.length<4){
+                            result.innerHTML="4글자 이상 입력하세요";
+                        }  else {
+                            result.innerHTML="";
+                        } 
+
+                }
+                function checkgender(){
+                    let e = document.getElementById("gender");
+                    let input = e.value;
+                        if(input=="M"){
+                            alert("남성");
+                        } else {
+                            alert("여성")
+                        }
+
+                }
+                    
+                
+            </script> 
+        
+        
+
+        <hr>
+            <h2>숫자 처리 객체</h2>
+            <pre>
+                Number객체 : 숫자관련
+                Math객체 : 랜덤값이나 소수점 처리, 수학적 계산
+            </pre>
+            <button onclick="numberTest()">Number객체 함수</button>
+            <button onclick="mathTest()">Math객체 함수</button>
+            <script>
+                // 최대 최소
+                function numberTest(){
+                    console.log(Number.MAX_VALUE);
+                    console.log(Number.MIN_VALUE);
+                }
+                // 정수 확인 isInteger()
+                console.log(Number.isInteger(100));
+                console.log(Number.isInteger(10.203));
+
+                function mathTest(){
+                    // random 값 처리
+
+                    console.log(Math.floor(Math.random()*10));
+                    
+                    // 절대값처리
+
+                    console.log(Math.abs(-10), Math.abs(10));
+                    
+                    // 소수점 버림
+    
+                    console.log(Math.floor(2.2));
+
+                    //소수점 반올림
+                    console.log(Math.round(2.6));
+
+                    // 소수점 올림
+                    console.log(Math.ceil(2.3));
+
+                    //숫자가 아닌 값을 매개변수로 넣으면?
+                    console.log(Math.floor('십'));
+                    console.log(Math.floor('십')==NaN);
+                    // 역시 안 됨
+                    // NaN인지 여부를 비교하려면 
+                    // isNaN;
+                    console.log(isNaN(Math.floor("십")))
+
+                }
+                
+
+            </script>
+
+
+        </body>
+    </html> 
