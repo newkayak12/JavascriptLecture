@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>operator</title>
+</head>
+<body>
+    <h2>연산자</h2>
+    <pre>
+        java에서 사용했던 방식과 동일하게 사용을 함
+
+    </pre>
+    <input type="text" id="str">   
+    <button onclick="addStr();">문자 더하기</button>
+    <div id="result"></div>
+
+
+    <script>
+        function addStr(){
+            let result = document.getElementById("result")
+            let input = document.getElementById("str")
+                if('end' != input.value){
+                    result.innerHTML+=input.value;
+                }
+                input.value = "";
+                    
+
+            
+        }
+    </script>
+
+    <h3>' === ' 연산자와 ' !== ' 연산자</h3>
+    <pre>
+        javascript의 유연성 때문에 나온 연산자이다. 
+    </pre>
+
+    <script>
+        
+        let su =100;
+        let strsu="100";
+        let su2 = 100;
+        console.log(su==strsu);
+        // ???????????????? 이게 true가 쳐나오네???? 흠...
+        // 자료형은 확인하지 않는다. 
+
+        console.log(su===strsu);
+        // 자료형의 일치 여부까지 확인을 한다.
+
+        console.log(su===su2);
+
+    </script>
+
+    <h3>짧은 조건문 이용하기</h3>
+    <pre>
+        && : 둘 다 true이면 true
+        || : 하나라도 true이면 true
+    </pre>
+
+    <script>
+        // let num = 100;
+        // num%2 == 0 && alert("짝수");
+// 이걸 계산 순서를 고려해서 이렇게 짜냐?? 사람인가??
+        // num%2 == 0 || alert("홀수");
+
+    </script>
+
+
+     <input type="number" id="nt">
+     <button onclick="test();">제출</button>
+     <div id="res"></div>
+
+     <script>
+         function test(){
+
+             let numb = document.getElementById("nt").value;
+             let al = document.getElementById("res")
+             numb%2==0 && (al.innerHTML="짝수");
+             numb%2==0 || (al.innerHTML="홀수");
+         }
+     </script>
+
+</body>
+</html>

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <title>Array</title>
+    </head>
+    <body>
+        <!-- 
+            자바는 같은 자료형을 여러개 보관했는데
+            JS는 다른 자료형도 한 배열 안에 묶어서 보관 가능
+            자바의 List<Obejct>와 유사 뭐든 집어 넣을 수 있지...
+            저장 방법도 ArrayList랑 유사하다는데...
+
+            이러면 위험하지... 제네릭이 없으니까 뭐가 뭔지 어떻게 할건데?
+            이렇게 유연함은 코드가 복잡해지는 결과를 낳을 수도 있다. 
+
+
+            다양한타입의 데이터를 보관하느 변수 모음으로 []를 통해 생성과 초기화를 동시에 처리 가능
+
+
+            var 변수명 = [값1, 값2, 값3, 함수, undefined 등 뭐든 들어갈 수 있다.];
+            
+            var 변수명 = new Array();
+            var 변수명 = new Array(개수);
+
+
+            변수명[인덱스] = 값; 
+            이렇게 값 주입함..
+
+         -->
+            <h1>배열</h1>
+            <pre>
+                js에서 배열은 자바의 ArrayList랑 유사.
+                    1. 다수의 자료형을 보관 가능하다.
+                    2. 길이 제한이 없다.
+                    3. 인덱스로 값을 접근한다.
+                *DB에서 데이터를 가져온 값, DOM(Documnet Object Model객체를 가져왔을 때 사용
+
+            </pre>
+
+            <script>
+                // 배열 선언하기
+                // 1. [] 이용하기 : var||let test= []; > 아무것도 없는 배열
+                //      int arrint = new int[10]; 이랑 같음
+                //      이러면 배열에 할당된 함수들을 사용할 수 있다.
+
+                // 2. array객체 생성 : let test = new Array(길이);
+                // 
+
+
+                let arr = [];
+                let arr2 = new Array();
+                arr = ["유병승", "정유정", "장혜린", "김예진"]
+                    console.log(arr.length);
+                // 길이가 0인데.. 굳이... 이러면  let arr 이러면 그냥 undefined라서 ...
+                    console.log(arr.push("abc"));
+                    console.log(arr);
+                    console.log(arr2.length);
+                // JS의 배열은 여러 자료형을 담을 수 있다.
+
+                arr = ["유병승", 19, 180.5, {hobby : "코딩", item : "키보드"}, function(){alert('배열 내부에서 여러 가지를 선언했다.')}]
+                    console.log(arr);
+
+                    for(let i =0; i<arr.length; i++){
+                        console.log(arr[i], typeof arr[i]);
+                    }
+                // 각 배열의 값에 접근하기 Arraylist방식이긴 하지만 배열이다.
+                // 기본적인 인덱스를 활용하여 접근한다.
+                    console.log(arr[0]);
+                    console.log(arr[3].hobby);
+                    console.log(arr[4]);
+                // console.log(arr[4]());
+                // 호출
+
+                //배열에 값을 대입하기
+                //index로 접근해서 값을 대입하면 된다.
+                    console.log(arr[0]);
+                arr[0] = "200";
+                    console.log(arr[0]);
+
+                arr[10] = "김지한 굿";
+                    console.log(arr);
+                    console.log(arr[10]);
+                // 이게 그냥 10번에 들어가?? 빈공간은...? - 그냥 공간 없는 것 확보하고
+
+                    for(let i =0; i<arr.length; i++){
+                        console.log(arr[i]);
+                        // undefined로 채워넣구나
+                    }   
+
+                arr=[];
+                     console.log(arr);
+                arr[5] = 20;
+                     console.log(arr);
+
+
+                // new 연산자로 배열을 생성
+                arr2 = new Array();
+                    console.log(arr2);
+                arr2 = new Array(10);
+                     console.log(arr2);
+                arr2[20] =20;
+                     console.log(arr2);
+
+                arr2 = new Array("유병승", 19, 180.5, {item:"노트북", book:"복세편살이란?"}, function(){alert("test")}, [1,2,3,4,5]);
+                    console.log(arr2);
+
+
+                
+            </script>
+
+             <h3>배열 내장 함수 이용하기_ 하나의 객체이기 떄문에 함수가 있죠</h3>
+             <pre>
+                 indexOf() : 배열에서 매개변수의 값과 일치하는 요소의 인덱스를 반환
+                    : 배열변수.indexOf(매개변수);
+             </pre>
+             <script>
+                 let student = ["곽승혁", "김두호", "김동규", "김상현", "김예진"];
+                 let index = student.indexOf("김두호");
+                    console.log(index);
+                 //배열에 없으면 -1 리턴 >> -1이 나오면 추가하고 아니면 추가하지마 이런 로직을 짤 수도 있고
+
+                //  배열에 지역 서울, 대전, 대구, 부산, 광주, 목포, 포함
+                // input 태그로 입력 받아 그 지역이 있는지 확인하고 출력
+
+             </script>
+            <input type="text" id="input">
+            <button onclick="city()">결과보기</button>
+
+            <div id = "result"></div>
+
+            <script>
+                function city(){
+                    let input = document.getElementById("input").value;
+                    let loc = new Array();
+                    loc = ["서울", "대전", "대구", "부산", "광주", "목포", "포항"];
+                    let temp = loc.indexOf(input);
+                        if(input !== -1){
+                            document.getElementById("result").innerHTML = /* "<h3>찾은 도시 번호 :  "+temp+ "번  도시 명  : " +loc[temp] +"</h3>"; */
+                            `<h3> 인덱스 번호 ${temp} : 찾은 도시 ${loc[temp]}</h3>`;
+                            // 백틱으로 감싸고 ${}로 변수를 쓸 수 있다. %d와 같이
+                        };
+
+                    
+                    
+                }
+            </script>
+
+            <h2>두 개 이상의 배열을 합치는 함수 : concat </h2>
+            <button onclick="concatTest()">ConCatTest</button>
+            <div id="area1"></div>
+            <script>
+                function concatTest(){
+                    let area = document.getElementById("area1");
+                    let animal = ["낙타", "라마", "강아지", "고양이", "사막여우"];
+                    let lunch = ["떡볶이", "라면", "칼국수", "초밥"];
+
+                    //concat이라는 함수는 매개변수 배열과 기준배열을 합쳐서 새로운 배열을 반환하는 기능을 한다.
+
+                    let result = animal.concat(lunch);
+                         console.log(result);
+
+                        // for(let i = 0; i<result.length; i++){
+                        //     area.innerHTML += result[i]+" ";
+                        // }
+                        
+
+                        area.innerHTML += `원본 값 : ${animal}<br>`;
+                        area.innerHTML += `원본 값 : ${lunch}<br>`;
+                        area.innerHTML += `원본 값 : ${result}`;
+                        
+                }
+            </script>
+
+            <h2>배열을 문자열로 합쳐주는 함수 : join()</h2>
+            <button onclick="joinTest()">Join Test</button>
+            <div id="area2"></div>
+
+            <script>
+                function joinTest(){
+                    let hobby = ["코딩", "영화", "노래", "기타", "흡연"];
+                    let result = hobby.join();
+
+                    document.getElementById("area2").innerHTML = ` 문자열 결과 ${result} &nbsp;&nbsp;&nbsp;타입: ${typeof result}`;
+
+                }
+            </script>
+
+            <h3>배열의 순서를 변경해주는 함수 : reverse</h3>
+            <button onclick= "reverseTest()">revserse</button>
+
+            <script>
+                function reverseTest(){
+                    let num = [1,2,3,4,5,6];
+                        console.log("원본 : "+num);
+                        console.log("reverse : "+num.reverse());
+                        console.log("reverse 후 원본 : "+num);
+                    // 원본 값 자체를 뒤집어서 저장해버린다. 정렬이랑 상관없이... 인덱스 순서를 바꿔서 저장함 아예
+
+                }
+            </script>
+
+            <h3>데이터를 순서 정렬하기 : sort()</h3>
+            <pre>
+                정렬에 대한 함수를 만들어서 정렬을 시키는데
+                -,0,+ 리턴값을 이용해서 처리하게 된다. (Collection.sort())랑 비슷
+                특이한 점은 함수를 매개 변수의 인자 값으로 넘길 수 있다는 것!
+
+            </pre>
+
+            <button onclick="sortTest()">sort!</button>
+            <div id="area4"></div>
+
+            <script>
+                function sortTest(){
+                    let ch = ["가", "다", "하", "마", "사", "아", "나"];
+                    let area = document.getElementById("area4");
+                    
+                    area.innerHTML = `원본 값  : ${ch} <br>`;
+                    
+                    let asc  = ch.sort(function(l,r){return r-l});
+                    area.innerHTML += `정렬 후 _ 오름차순 : ${asc} <br>`;
+                    // sort(함수를 매개변수로 받음)
+                    // sort(function(left, right) >> 리턴으로 -,0,+가 나옴)
+                    let desc  = ch.sort(function(l,r){return l-r});
+                    area.innerHTML += `정렬 후 _ 내림차순 : ${desc} <br><br>`;
+// 문자는 안되는데??
+                    let f = function(l,r){
+                        if(l>r) return -1;
+                        else if(l<r) return 1;
+                        else return 0;
+                    }
+                    let n = function(l,r){
+                        if(l>r) return +1;
+                        else if(l<r) return -1;
+                        else return 0;
+                    }
+                    area.innerHTML += `변경_ 정렬 후 _ 내림차순 : ${ch.sort(f)} <br>`;
+                    area.innerHTML += `변경_ 정렬 후 _ 오름차순 : ${ch.sort(n)} <br><br>`;
+
+// 이렇게 함수를 내부적으로 처리를 해서
+// 이건 그럴 수밖에 없는게 compareTo()를 오버라이드하는 것처럼 기준을 줄 수 없으니까 기본적으로 우리가...
+
+                    let no = [3,2,1,5,8,7];
+                    area.innerHTML += `원본 값  : ${no} <br>`;
+                    
+                    let ascn  = no.sort(function(l,r){return l-r});
+                    area.innerHTML += `정렬 후 _ 오름차순 : ${ascn} <br>`;
+                    // sort(함수를 매개변수로 받음)
+                    // sort(function(left, right) >> 리턴으로 -,0,+가 나옴)
+                    let descn  = no.sort(function(l,r){return r-l});
+                    area.innerHTML += `정렬 후 _ 내림차순 : ${descn} <br><br>`;
+                }
+            </script>
+            
+
+<hr>
+
+            <h3>배열의 데이터를 조작하는 함수 : push/ pop/ shift/ unshift/ slice /splice</h3>
+            <pre>
+                push() : 배열의 맨 뒤에 요소를 추가하는 함수 (자바의 add)
+                pop() : 배열의 맨 뒤 인덱스를 제거하는 함수 + 제거된 내용을 반환
+            </pre>
+
+            <script>
+                let arrItem = ["물약", "검", "방패"];
+                    console.log(arrItem);
+
+                arrItem.push("모자");
+                    console.log(arrItem);
+
+                let poped = arrItem.pop()
+                    console.log(poped);
+                    console.log(arrItem);
+
+                
+
+            </script>
+
+            <pre>
+                shift() : 맨 앞의 요소를 제거하는 함수
+                unshift() : 맨 앞의 요소를 추가하는 함수
+            </pre>
+
+            <script>
+                arrItem.unshift("지팡이");
+                    console.log(arrItem);
+                let shf = arrItem.shift();
+                    console.log(shf);
+                    console.log(arrItem);
+
+                    /* react같은거 쓰면 이런 함수 많이 쓸겁니다. */
+            </script>
+
+            <pre>
+                slice() : 배열의 일부를 잘라서 새 배열로 생성
+                    slice(시작 인덱스, 끝 인덱스(이 숫자 전까지)); 이렇게 자른 것을 새롭게 반환한다.
+                splice() : 배열의 특정 위치 값을 지우고 그 위치에 값을 추가하는
+                    splice(시작 인덱스, 지울 개수, 추가할 값[, 추가할 값.....] );
+                    추가할 값을 안 넣으면 그냥 개수만큼 지우고 끝냄
+                    지울 개수를 안주면 그냥 추가만 할 수도 있다.
+                <!-- 원본은 두고 복본으로 작업할 때... 이런거 쓴다네요 -->
+            </pre>
+
+            <script>
+                //slice();
+                let language = ["java", "oracle", "jdbc", "html", "css", "JS"];
+                    console.log(language);
+                // 화면 구현에 대한 내용을 따로 배열로 저장?
+                let front = language.slice(3,language.length);
+                    console.log(front);
+                    console.log(language);
+                
+                front = language.slice();
+                    console.log(front);
+                // 그대로 나온다. 배열 전체를 복사(깊은 복사)
+                front = language.slice(3);
+                // 처음부터 인덱스까지
+                front = language.slice(-2);
+                    console.log("음수  " + front);
+                front = language.slice(-4, -1);
+                    console.log("음수, 음수  " + front);
+                
+
+
+
+
+                // splice();
+
+                // 일부값을 수정, 삭제
+                    console.log(`원본 : ${language}`);
+                language.splice(2,1,'JTBC');
+                    console.log(`splice modi : ${language}`);
+                // 원본값 자체를 수정한다.
+                language.splice(2,1);
+                    console.log(`splice rm : ${language}`);
+                
+                language.splice(2,0,'JTBC', "유병승", "곧 점심");
+                console.log(`splice add : ${language}`);
+                
+            </script>
+            <hr>
+            <h2>배열에 있는 값을 필터하는 함수</h2>
+            <pre>
+                find() : 요소를 특정 기준에 맞는 요소를 찾는 함수 > 한 개만
+                includes() : 특정 값이 배열에 있는지 확인하는 함수 
+                filter() : 특정 기준에 맞는 요소를 찾는 함수 
+            </pre>
+
+            <script>
+                let height = [170.5, 180, 150.2, 190, 200];
+                    console.log(height.includes(170.5));
+                    console.log(height.includes(170));
+                // find, filter 함수는 기준을 매개변수로 전달해야함 > 함수를 매개변수로 받음
+                // 매개변수 한개 갖는 함수를 매개변수로 받는다.
+                let f= function(v){
+                    return 180<v;
+                }
+
+
+                let finder = height.find(f);
+                    console.log(`result ${height}`);
+                    console.log(`find ${finder}`);
+                    // 하나만 찾고 마네?
+
+                // let newarr = [];
+                //     for(let i =0; i<height.length; i++){
+                //         if(f(height[i])){
+                //             newarr.push(height[i]);
+                //         }
+                //     }
+                // 이렇게 쓸 수도
+
+
+                let filter = height.filter(f);
+                    console.log(`result ${height}`);
+                    console.log(`filter ${filter}`);
+                // 필터는 find에서 안나오던 것도 다 나오네
+
+
+
+
+            </script>
+
+            <h3>배열 값 순회하는 함수</h3>
+            <pre>
+                forEach() : 배열에 있는 모든 값에 접근하는 함수
+                매개변수로 함수를 전달받음 매개변수가 두 개 ~ 세 개를 받음
+            </pre>
+
+            <script>
+                    for(let i=0; i<height.length; i++){
+                            console.log(height[i]);
+                    }
+
+                    //  이렇게 접근해야했는데..
+
+                    let f1  = function(value, index, arr){
+                        // value
+                        console.log(`index : ${index} value : ${value} 현재 배열: ${arr}`);
+                    }
+
+                    height.forEach(f1); /* 배열 자료형에서만 사용이 가능함 */
+                    // for each문을 이렇게 하네...
+                    //  개수를 세거나 무슨 값이 있는지 확인하거나
+                    let el = document.getElementsByName("pre");
+                        console.log(el);
+                    // 얘네는 온전히 배열로 사용이 안 됨
+                    Array.prototype.forEach.call(el,f1) /* 이렇게 불러서 사용하거든요 그래서 굳이 쓰려면 */
+            </script>
+
+            <h3>누적 계산을 해주는 함수 : reduce()</h3>
+            <pre>
+                reduce() :  특정변수에 return 값을 지속 저장하는 함수
+                매개변수로 함수를 전달받음
+                그 매개변수 함수는 두 개의 매개변수가 있음
+                첫 번째 : 초기값(0번 인덱스 값)
+                두 번째 : 다음 값
+
+                return 값이 처음 매개 변수에 대입됨
+                * 초기값을 담는 변수에
+            </pre>
+
+            <!-- 키들의 총 합?? -->
+
+            <script>
+              let result2 =   height.reduce(function(total, nextval){
+                    console.log(total, nextval);
+                    return total+nextval;
+                }, 1000/* 최초값을 넣을 수도 생략할 수도 */);
+                //누적 합게를 구하는데..?
+
+                // 결과 값은 마지막 값임 
+
+                 console.log(`result : ${result2} avg : ${result2/height.length}`);
+            </script>
+
+            <!-- <pre>sssss</pre> -->
+    </body>
+</html>
