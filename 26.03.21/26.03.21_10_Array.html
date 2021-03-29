@@ -63,7 +63,7 @@
                 // JS의 배열은 여러 자료형을 담을 수 있다.
 
                 arr = ["유병승", 19, 180.5, {hobby : "코딩", item : "키보드"}, function(){alert('배열 내부에서 여러 가지를 선언했다.')}]
-                    console.log(arr);
+
 
                     for(let i =0; i<arr.length; i++){
                         console.log(arr[i], typeof arr[i]);
@@ -357,6 +357,8 @@
                     console.log(height.includes(170));
                 // find, filter 함수는 기준을 매개변수로 전달해야함 > 함수를 매개변수로 받음
                 // 매개변수 한개 갖는 함수를 매개변수로 받는다.
+
+
                 let f= function(v){
                     return 180<v;
                 }
@@ -437,8 +439,20 @@
                 // 결과 값은 마지막 값임 
 
                  console.log(`result : ${result2} avg : ${result2/height.length}`);
+            
+            
             </script>
 
-            <!-- <pre>sssss</pre> -->
+               <script>
+                   let re = [1,2,3,4,5];
+                //    console.log(re);
+                //    re = re.splice(2);
+                //    console.log(re);
+                   lss = re.splice(1,1);
+                //    console.log(re);
+                    // let lss = re.splice(0,1, 100);
+                    console.log(re);
+                    console.log(lss);
+               </script>
     </body>
-</html>
+</html>˜˜

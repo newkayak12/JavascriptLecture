@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>네이버 로그인 화면</title>
+</head>
+<body>
+    <!-- 1번 문제 html요소의 종류와 사용한 이유 분석-->
+    <!-- 2번 문제 입력 제한 속성 -->
+    <!-- 3번 CSS속성 종류 -->
+
+    <!-- 
+        주석에 '1.내용'은 1번 문제에 대한 답변
+        주석에 '2.내용'은 2번 문제에 대한 답변
+    -->
+
+
+    <!-- 마지막에 답변 모음 -->
+    <div>
+            <!-- 1.수직 공간 분할 -->
+        <h1>  <!-- 1.로고 작성 h1으로 제목임을 알리고 a태그로 네이버 메인으로 연결  -->
+            <a href="\">
+            NAVER
+            </a>
+        </h1>
+            
+        
+
+
+    </div>
+
+    <!-- 네이버 로고 영역 여기까지-->
+
+
+
+
+
+    <div> <!-- 1.다시 공간의 분할 -->
+
+        <form action="" method="POST" > <!-- 1.입력 내용을 전송하기 위한 폼태그 사용  물론! post로 하진 않았겠지만 배운게 post와 get이므로 그나마 보안에 나은 post를 작성-->
+            <span>  <!-- 1.id/비밀번호/비밀번호 체크  span 시작 -->
+
+    
+                <div>  <!--1. 아이디 입력 -->
+                        <label for=""><h3> 아이디</h3></label> <!-- 1.라벨을 통해 선택 영역 확대, h3태그로 입력란 유도 해당 라벨은 input:text로 연결(아이디) -->
+                            
+                            <span> <!-- 1.수평공간 분할 -->
+                                
+                                <input type="text" name="id" id="int" minlength="" maxlength=""> 
+                                <!-- 
+                                    1.아이디 입력창 굳이 주소까지 검사할 필요가 없으므로 텍스트로 설정/
+                                    2. 제약사항은 최대길이 최소길이 체크
+                                    
+                                -->
+                                <span>@naver.com</span> <!-- 1.입력창과 연달아 해당 서비스 제공업체의 주소를 보여줌으로서 사용자에게 해당 이메일 계정의 전체 이름을 알림 -->
+
+                            </span>
+
+                        <span>멋진 아이디입니다.</span> <!-- 1.아이디 중복 여부 체크, 자바스크립트로 span의 innerhtml값을 수정 -->
+                </div>          
+
+    
+                <div>    <!--1. 비밀번호 입력 -->
+                    <label for=""><h3>비밀번호</h3></label> <!-- 1.다시, 라벨을 통한 선택 영역 확대와 h3태그로 안내 해당 라벨은 비밀번호 input으로 연결 -->
+
+                        <span>  <!-- 1.수평적 공간 분할 -->
+
+
+                            <input type="password" name="" id="" minlength="" maxlength="" > 
+                                <!--1. input 타입은 password,
+                                    2. 역시 최소/최대길이 측정을 위해서 넣음(물론 js로 측정하는게 즉각적으로 반응이 있을 수 있겠지만)-->
+                            <span>사용 가능 / 불가 <img src="자물쇠" alt=""></span>
+                            <!-- 1. 비밀번호 검사 결과로 span.innerHtml에 사용 가능 불가 결과값 주입 -->
+
+
+                        </span>
+
+                        <span>비밀번호 체크</span>
+                        <!-- 1. 왜 구체적으로 사용이 가능한지 불가능한지 기술함 ex) 8~16자 영문 대 소문자... -->
+                </div>
+
+                <div> <!-- 1. 비밀번호 재확인 영역 -->
+
+                    <label for=""><h3>비밀번호 재확인</h3></label> 
+                    <!-- 1. 라벨로 영역 확장 h3태그로 입력란 안내 해당 라벨은 비밀번호 입력 input과 연결됨 -->
+                        <span>
+                            <input type="password" name="" id="" minlength="" maxlength="">
+                            <!-- 1.input:password 
+                                2. 최소 최대 길이 지정 js로 위의 비밀번호와 일치 여부 판단할 것으로 예상됨 -->
+                            <img src="자물쇠" alt="">
+                            <!-- 1. 비밀번호입력창과 똑같은 기능을 할 것 -->
+                        </span>
+
+                        <span>비밀번호 일치</span>
+                        <!-- 1. 비밀번호 일치여부에 따라 span.innerhtml값 수정으로 안내문구 출력 -->
+
+                </div>
+
+
+            </span>
+    <!-- 1.아이디/ 비밀번호/ 비밀번호 체크하는 span 끝-->
+
+
+
+    <!-- 1. 개인정보 입력하는 span 시작 -->
+            <span>
+                <div>
+
+                    <label for=""><h3> 이름</h3></label> 
+                    <!-- 1.라벨, h3태그 -->
+                        
+                        <span> <!-- 1.이름 입력 공간 나눔 -->
+                            <input type="text" name="id" id="int">
+                            <!-- 1.이름 입력 input:text js로 한글 영대소문자 감지 (특수기호, 공백 감지) -->
+                        </span>
+
+                    <span>한글과 영문 대소문자</span>
+                    <!-- 1.감지한 내용 innerhtml으로 주입, 안내 -->
+                </div>  
+
+                <div> <!-- 1.생년 월일 영역 -->
+                    <label for=""><h3>생년월일</h3></label>
+                    <!-- 1.라벨과 h3태그 -->
+                        <span>
+                            <input type="number" name="" id="" minlength="" maxlength="" min="" max="" >
+                            <!-- 1.년도를 입력하는 곳 input:number로 받음 
+                                    2. 최소, 최대길이 지정 , 최대값, 최소값-->
+                        </span>
+                        <!-- 1.span으로 공간 분할 -->
+
+
+                        <span>
+                            <select name="" id="">
+                                <option value="">1</option>
+                                <option value="">2</option>
+                                <option value="">3</option>
+                                <option value="">4</option>
+                                <option value="">5</option>
+                                <option value="">6</option>
+                                <option value="">7</option>
+                                <option value="">8</option>
+                                <option value="">9</option>
+                                <option value="">10</option>
+                                <option value="">11</option>
+                                <option value="">12</option>
+                            </select>
+                            <!-- 1.월을 선택하는 selector  -->
+                        </span>
+                        <!-- 1.월을 입력하는 공간 분할 -->
+
+
+                        <span>
+                            <input type="number" name="" id="" min="" minlength="" max="" maxlength="">
+                            <!-- 1.일을 입력하는 number -->
+                            <!-- 2. 최대 길이, 최소 길이, 최대값, 최소값  -->
+                        </span>
+                        <!-- 1.공간 분할 -->
+                        <span>생년/월/일 체크</span>
+                        <!-- 1.js로 생년 월일 체크를 위해서 만들어 놓은 span -->
+                </div>
+
+                <div>
+                        <label for=""><h3>성별</h3></label>
+                        <!-- 1. 라벨과 h3태그 -->
+                            
+                            <div> <!-- 1. 성별 영역 -->
+                                <select name="" id="">
+                                    
+                                    <option value="">성별</option>
+                                    <option value="">남</option>
+                                    <option value="">녀</option>
+                                    <option value="">선택 안함</option>
+                                    <!-- 
+                                        1.select로 성별 열거 js에서 '성별'일 경우 반송 예상
+                                        
+                                     -->
+                                </select>
+
+                            </div>
+
+                            <div>
+                                <!-- 1.이메일 영역 -->
+                                <label for=""><h3> 본인 확인 이메일</h3><span>(선택)</span></label> 
+                                <span>
+                                    <input type="email" name="id" id="int" minlength="" maxlength="">
+                                    <!-- 1.input:email 
+                                        2. 최소 최대 길이 있음-->
+                                </span>
+                                <span>메일주소를 다시 확인</span>
+                                <!-- 1.innerhtml로 유도 -->
+                            </div>
+                        
+                </div>
+            <!-- 1.신상 정보라인끝 -->
+
+                <div>
+                        
+                            <label for=""><h3>휴대전화</h3></label>
+                            <div>
+                                <select name="" id="">
+                                  <!--1. 지역코드 select -->
+                                    <option value="">대한민국 +82</option>
+                                    <option value=""></option>
+                                    <option value=""></option>
+                                    <option value=""></option>
+                                </select>
+                            </div>
+
+
+                            <div>
+                                <input type="tel" placeholder="전화번호 입력">
+                                <a href=""> <span>인증번호 받기</span></a>
+                            <!-- 1. 전화번호 입력 input:tel과 인증번호 창으로 넘어가는 a태그 -->
+                            </div>
+                            <div>
+                                <input type="number" name="" id="" placeholder="인증번호를 입력하세요" minlength="" maxlength="">
+                                <!-- 1.인증번호 입력 input:number
+                                2. 최소 최대길이 -->
+                            </div>
+                                <span>전화번호를 다시 확인해주세요</span>
+                            <!-- 1.일치여부 span -->
+                </div>
+
+                        <button>가입하기</button>
+                        <!-- 가입하기 버튼 -->
+        </form>
+
+    </div>
+    <!-- 가입 양식 작성창 -->
+
+
+
+
+    <div>
+        <!-- 1.기타 정보란을 위해서 수직나눔 -->˜
+        <ul> <!-- ul>li*4태그로 각각 a태그로 이동 -->
+            <li> <a href="">이용약관</a> </li>
+            <li> <a href="">개인정보처리방침</a> </li>
+            <li> <a href="">책임의 한계와 법적고지</a> </li>
+            <li> <a href="">회원정보 고객센터</a> </li>
+        </ul>
+
+        <!-- address태그로 구역 나눔 -->
+        <address>
+            <em>카피라이트 마크</em>
+            <a href=""></a>
+            <!-- 1.네이버로 이동 -->
+        </address>
+    </div>
+    
+</body>
+</html>
+
+<!-- 
+    1. 사용자 입력을 위해 사용된 html 요소의 종류와 해당 요소를 사용한 이유를 분삭하시오)
+    
+ 아이디 : input: text 아이디를 입력받기 위해서 (일반적으로 사용하는 input이 텍스트이다.)
+ 비밀번호 / 비밀번호 재확인 : input:password  비밀번호를 입력받는데, 입력받는 도중에 보안상 비밀번호가 노출되지 않도록 하기 위해서
+ 이름 : input:text 이름을 입력 받기 위해서
+
+ 생년 :input: number 날짜를 입력받기 위해서
+ 월 : select>option*12 : 이미 정해진 열 두달 중 사용자가 고르게 하기 위해서 
+ 일 : input:number 날짜를 입력받기 위해서
+
+ input:date를 쓰지 않은 것은 직관적인 인터페이를 쓰기 위해서이거나 생년월일의 내부적처리문제 떄문일 것으로 추정
+
+ 성별 : select>option*4 : 성별/ 여성/ 남성/ 선택안함 중 선택하게 하기 위해서
+
+ 본인 확인 이메일 : input:email 이메일을 입력할 때 뒷부분의 주소를 검증하기 위해서
+ 휴대전화 _ 국가 코드 : select>option*(국가의 수) : 국가 코드 중 선택
+ 휴대전화 _ 전화번호 입력창 : input: number
+ 휴대전화 _ 인증번호 : input:number
+
+ 가입하기 : button form을 보내는 trigger
+-->
+
+
+<!-- 
+    2. 1번에서 분석한 html요소에 적용된 입력 제한 속성의 종류와 해당 속성을 사용한 이유를 분석하시오
+   
+    아이디 : 속성 min_length, max_length : 아이디의 길이 제한
+    비밀번호/ 비밀번호 재확인 : 속성 min_length, max_length : 비밀번호의 길이 제한
+    이름 : 속성 min_length, max_length : 이름의 길이 제한
+
+    생년 : 속성 min_length, max_length , max, min : 생년의 길이 제한 및 최대 최소값 설정
+    일 : 속성 min_length, max_length , max, min : 일의 길이 제한 및 최대 최소값 설정
+
+    휴대전화 - 전화번호 input의 pattern으로 정규표현식을 적용한 것으로 추정
+
+
+ -->
+
+
+
+<!-- 
+    회원가입 화면 디자인을 위해 사용한 CSS속성의 종류가 어떤 것이 있는지 분석하시오
+font-family 폰트는 돋움, helvetica sans-serif
+display는 block을 주로 사용
+overflow는 hidden
+input tag들는 relative
+text-decoration은  none
+select는 inline-block
+-->
