@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arguments</title>
+</head>
+<body>
+    
+    <h1> 매개 변수 전체를 보관하는 객체 </h1>
+
+    <pre>
+        arguments 객체 인자를 순차적으로 보관하는 객체
+    </pre>
+
+    <script>
+        let arguTest=function(){ /* let arguTest=function(a,b,c){ 이렇게 넣어도 여러 개를 넣을 수 있다. arguments로 넣는다. */
+            console.log(arguments);
+                for(let i = 0; i<arguments.length; i++){
+                    console.log(arguments[i]);
+                    
+                }
+        }
+
+        arguTest(1,2,3,4,5);
+        // 매개변수를 선언하지 않았는데도 던져진 값에 대해서 argument객체를 통해서 받아올 수 있다.
+        arguTest(1,'김상현', true, function(){consol.log('test')});
+
+    </script>
+</body>
+</html>
