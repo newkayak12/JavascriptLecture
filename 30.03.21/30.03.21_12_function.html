@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title> 함수 처리 </title>
+        </head>
+
+        <body>
+            <h1>함수 선언하기</h1>
+            <ul>
+                <li>
+                    <pre>
+                        <b>선언적 함수: 함수명이 명시된 함수</b>
+                        functio 함수명 ([매개변수,...]) { 처리 로직 }
+                    </pre>
+
+                    <button onclick="sumFunc(prompt('수1 : ',''), prompt('수2 : ',''))">계산</button>
+                    <div id="container"></div>
+                
+                </li>
+                <li>
+                    <pre>
+
+                        <b>익명 함수 : 함수명이 없는 함수</b>
+                        function([매개변수,...]) { 처리 로직 }
+                        이름이 없기 때문에 변수(일반 변수, 매개 변수의 인자)에 넣어서 사용
+
+                    </pre>
+                </li>
+            </ul>
+
+            <h2>선언적 함수</h2>
+
+            <pre>
+
+            </pre>
+            <script>
+                function basicFunc(){
+                    console.log("난 아무 것도 없는 함수")
+                }
+
+                basicFunc();
+
+                function paramFunc(age, name){
+                    if(typeof(age)=='number'){
+                        console.log(age,name);
+                        console.log(`당신의 나이는 ${--age}이고 이름은 ${name}입니다.`);
+                    } else {
+
+
+                        console.error('첫번째 매개변수는 숫자형이어야 합니다.');
+                    }
+
+                }
+
+                function sumFunc(su,su2){
+                    let el = document.getElementById("container");
+                    el.innerHTML = Number(su)+Number(su2);
+                }
+                
+                
+                paramFunc(19,"유병승")
+                
+                /* 이러면?? */
+                paramFunc("유병승", 19)
+                // 이러면 nan나오는데??
+
+                // 만약에 함수에서 선언한 매개변수의 인자를 다  넣지 않고 호출한다면?
+
+                paramFunc(19);
+                // 당신의 나이는 18이고 이름은 undefined입니다.
+
+
+                paramFunc(10,'유병승','시흥시');
+                // 인자 수를 벗어나면 무시
+
+                //반환형이 있는 선언적 함수
+                //JS에서는 선언 시에 반환형을 명시하지 않는다.
+                //반환형이 있는 함수의 경우
+                //내부에서({} return
+
+                    function returnTest(){
+                        console.log("실행됐니?");
+                        // return '나 리턴!'
+                        return [1,2,3,4,5];
+                    }
+
+                    let vars = returnTest();
+                        console.log(vars);
+
+                    function makeArray(va1, va2, va3, va4, va5, va6){
+                        return[va1, va2, va3, va4, va5, va6];
+                    }
+
+                    let arr = makeArray(1,2,3,4,5,6);
+                        console.log(arr);
+
+                    arr = makeArray('가','나','다','라','마');
+                        console.log(arr);
+                    // 선언적 함수 여기
+
+
+
+                    // 함수명 중복??
+                    function makeArray(){
+
+
+                        consolel.log("이건?");
+
+                    }
+                    // 이렇게 하면 밑에에서 덮어씀
+                    // 함수 호이스팅?
+                    // 두 개의 js파일로 함수명이 중복되면? > 찾아내서 수정해야함
+                    // 동일 함수를 덮어쓰기 해서 로직이 바뀌어 버림
+                    //  아예 익명 함수로...?? 그래서 let이 나왔고.. 변수에 넣고 사용
+
+
+                    
+                    }
+                </script>
+                <hr>
+
+                <h2>익명함수 활용하기</h2>
+                <pre>
+                    
+                    익명함수를 변수(일반, 매개)에 대입하기 전까지 활용이 불가능한 함수
+                    반드시 변수에 넣어서 사용을 함.
+                    스스로 동작하게 만들 수 있음 > 재사용이 불가능
+                    callback 함수에서 많이 사용 > 매개변수로 함수를 넣는 것
+                    >이벤트가 발생했을 떄 제어권을 넘겼으니까 걔가 실행시키거나하는...
+
+                    또한 함수 이름이 중복되는 경우가 발생할 수 있기 떄문에 변수에 넣어서 사용
+
+                </pre>
+
+
+                 <script>
+//  매개변수가 없고 반환형이 없는 함수 선언
+                  let nothing = function(){
+                        console.log('난 아무 것도 없다!');
+
+                        // 그냥 이렇게 두면 활용이 불가능한 쓰레기 코드 그래서 Uncaught SyntaxError: Function statements require a function name
+                        // 변수에 넣어준다. 그래서
+                     }
+
+                     nothing();
+                    //  이렇게 호출한다.
+                        console.log(nothing);
+                    
+                        // 매개변수 있고 반환형 없는 함수
+                    let annoParam = function(su, su2){
+                            console.log(su+su2);
+
+                        return su+su2;
+                    }
+
+                   let result =  annoParam(10,20);
+                         console.log(`출력 결과 : ${result}`);
+
+
+
+                   //변수, 함수 호이스팅으로 인한 변화!
+                    // 호이스팅 : 
+                    /* 
+                    프로그램 위에서 아래로, interpret방식이라 읽어야 실행이됨
+
+                     */
+                        console.log("--------호이스팅--------");
+                        console.log(test);
+                        // Uncaught ReferenceError: test is not defined를 예상했으나 undefine이 나왔다. test가 있는 것은 알았다.
+                        // 페이지가 실행되면 페이지에 있는 변수명들만 싹다 읽어와서 undefined로 나오는 거라는 소리네
+
+        /* 
+        
+        함수 안에 있는 선언들을 모두 끌어올려서 해당 함수 유효 범위의 최상단에 선언하는 것을 말한다.
+
+        호이스팅이란
+
+        자바스크립트 함수는 실행되기 전에 함수 안에 필요한 변수값들을 모두 모아서 유효 범위의 최상단에 선언한다.
+        자바스크립트 Parser가 함수 실행 전 해당 함수를 한 번 훑는다.
+        함수 안에 존재하는 변수/함수선언에 대한 정보를 기억하고 있다가 실행시킨다.
+        유효 범위: 함수 블록 {} 안에서 유효
+        즉, 함수 내에서 아래쪽에 존재하는 내용 중 필요한 값들을 끌어올리는 것이다.
+        실제로 코드가 끌어올려지는 건 아니며, 자바스크립트 Parser 내부적으로 끌어올려서 처리하는 것이다.
+        실제 메모리에서는 변화가 없다.
+        https://gmlwjd9405.github.io/2019/04/22/javascript-hoisting.html
+
+
+        이러한 호이스팅이 발생하는 이유는 자바스크립트 해석기의 동작 방식 때문입니다.
+         우선 자바스크립트는 코드가 실행되면 코드를 파싱합니다. 이때 전역 컨텍스트에 전역 변수 및 함수를 등록하게 됩니다. 
+         이때 코드를 해석해 변수 및 함수 선언문을 코드의 상단으로 끌어올리는 효과가 발생하게 됩니다.
+
+          그 후 코드를 실행하게 되는데, 이때 각각의 함수를 호출하고 함수 내부의 코드를 파싱해서 함수 컨텍스트에 함수 스코프를 가지는 변수를 등록하고 실행하는 작업을 거치게 됩니다.
+        */
+
+
+                    var test = "이것도 출력해!";
+                            console.log(test);
+
+                        // 회사가면 var되어있는게 있고 let이 있는게 있는데 그냥 그대로 따라가야한다.
+
+                    hoistingFunc();
+                        // function hoisting이 되서 실행이 되네?
+                    function hoistingFunc(){
+                            console.log("호이스팅 되어 호출이 가능");
+
+                    }
+
+                    // 그러면 익명함수의 호이스팅은?
+                    
+                    // anoFunc();
+                    // Uncaught TypeError: anoFunc is not a function
+                    // undefined인데.. function처럼 써서 위의 문구가 출력되네요
+
+
+                    var anoFunc = function(){  /* 이 라인을 읽어야 anoFunc가 function이 됩니다. */
+                            console.log("익명함수 호이스팅!?");
+                    }   
+
+                    anoFunc();
+                        console.log("-------함수 호이스팅--------------");
+                    // 이걸 이용해서 호이스팅을 할 때 검출해낼 수 있을까??
+
+
+                    var makeArray1 = function(a,b,c,d,e){
+                        return [a,b,c,d,e];
+                    }
+
+                        console.log(makeArray1(1,2,3,4,5));
+                        console.log(makeArray1('가','나','다','라','마'));
+
+
+                    var makeArray1 = function(){
+
+                        console.log("이것도 덮어쓸래?");
+                    }
+
+                        console.log(makeArray1(1,2,3,4,5));
+                        console.log(makeArray1('가','나','다','라','마'));
+
+                    // 이렇게 안되니까... 선언적 함수보다는 변수로 받아서 쓰면 조금 덜하다...
+                    // 완전 덮어쓰는 것 자체를 막아서 이런 문제가 없겠지
+
+
+                    // 일반적으로 dom이랑 쓸 때는..... 별로 없다는데.....
+                    // node.js같은 것을 쓸 때는...
+
+                    
+                 </script>
+
+
+
+            
+
+
+
+
+        </body>
+    </html>
