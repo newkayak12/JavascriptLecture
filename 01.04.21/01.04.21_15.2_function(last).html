@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>function _ eval</title>
+</head>
+<body>
+
+    <h3> eval() 문자열로 작성된 js코드를 동적으로 변환해주는 함수</h3>
+
+    <input type="number" name="" id="su">
+    <input type="number" name="" id="su2">
+
+    <pre>
+        문자열로 js코드를 작성한 것을 코드로 바꿔주는 함수
+    </pre>
+
+    <textarea name="tt" id="tt" cols="30" rows="10"></textarea>
+    <button onclick="test2()">실행</button>
+    <div id="area2"></div>
+
+    <script>
+        function test2(){
+
+            let textVal = document.getElementById("tt").value;
+            console.log(textVal);
+            eval(textVal);
+
+
+            let temp = "let number = document.getElementById('su').value;";
+            temp += "let number2 = document.getElementById('su2').value;";
+            temp += "document.getElementById('area2').innerHTML = Number(number) + Number(number2);";
+
+            eval(temp);
+        }
+    </script>
+
+    <h3>날짜 처리하는 객체 Date</h3>
+
+    <pre>
+        자바스크립트에서 날짜를 처리하는 객체
+    </pre>
+
+    <div id="td"></div>
+
+    <script>
+        let today = new Date();
+        // 오늘 날짜 가져옴
+        let td = document.getElementById("td");
+        td.innerHTML = today+ "<br>";
+
+        // 날짜에 대해서 각 년, 월, 일 등 포맷을 변경 할 수 있다. 
+        
+        td.innerHTML += today.getFullYear()+"/";
+        td.innerHTML += (today.getMonth()+1)+"/"; //월은 +1 0부터 시작
+        td.innerHTML += today.getDate()+"&nbsp;";
+        td.innerHTML += "("+today.getDay()+")&nbsp;"; //요일 _ 요일을 숫자로 표시 
+        // switch 처리해야함
+
+        td.innerHTML += today.getHours()+":";
+        td.innerHTML += today.getMinutes()+":";
+        td.innerHTML += today.getSeconds()+"<br>";
+
+
+        // 원하는 날짜를 표시하고 싶을 떄
+        let birthDay = new Date(1996,6-1,26, 1,00,27);  /* 월은 컴퓨터가 0부터 시작 유의 */
+        td.innerHTML += birthDay;
+
+
+    </script>
+
+
+<!-- set interval이라는 주기적으로 실행하는 함수가 있다는데.. -->
+
+
+        <div id="container">
+            <h1>현재시간 : <span id="time"></span></h1>
+      </div>
+
+      <script>
+          /* setInterval(function(){
+              const time = new Date();
+              const area = document.querySelector("#container span#time");
+              area.innerHTML = `${time.getHours()} : ${time.getMinutes()} : ${time.getSeconds()}`
+          }, 1000); */
+      </script>
+
+
+
+
+    <h3>ES6화살표 함수 알아보기</h3>
+    <pre>
+        자바에서 람다 처럼 ()->{}
+        익명함수를 표현할 때 가독성이 좋게 표현을 한 것을 화살표 함수라고 함
+        익명함수 : function() {  };
+        화살표 함수 : () => { };
+        
+        익명함수 : function(su1, su2){  return };
+        화살표 함수 : (su1, su2) -> { return  };
+    </pre>
+
+    <script>
+        const arrowFn = ()=>{alert('난 화살표 함수')}
+        // arrowFn();\\
+        let count = 0;
+
+        /* setInterval(()=>{
+            console.log(++count+"초마다 확인");
+        },1000) */
+
+            let arr = [180.5, 180, 175.4, 170.3, 166.3, 155.5];
+            let arrFilter = arr.filter((v) => {
+                return v >170;
+            })
+
+            console.log(arrFilter);
+
+            arr.forEach((value, index)=>{
+                console.log(`${index} : ${value}`);
+            })
+
+
+
+            
+
+
+
+    </script>
+</body>
+</html>

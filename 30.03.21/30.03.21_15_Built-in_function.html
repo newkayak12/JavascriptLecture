@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Built-in function</title>
+        </head>
+        <body>
+            <h2>인코딩 관련 내장함수</h2>
+            <pre>
+                인코딩과 디코딩 관련 함수 
+                네트워크 상에서 정보(데이터)를 공유하기 위해서는 문자에 대한 처리가 중요하다. 
+
+                인코딩, 디코딩 방법은 매핑이 되어있다.(A라는 인코딩방식으로 저장하면 A로 디코딩해야);
+               
+                escape / unescape : 영문자, 숫자 , 일부 특수기호(@,*,-,_,.,/)들을 제외한 모든 문자를 인코딩처리하는 함수
+
+                encodeURI / decodeURI : escape에서 인터넷주소에 사용되는 일부 특수 기호(: , ;  , /  , = , &)는 제외하고 인코딩처리를 함
+
+                encodeURIComponent / decodeURIComponent : 앙ㄹ파벳, 숫자를 제외한 모든 문자를 인코딩처리 
+
+                자바에서 인코딩해서 넘기면 스크립트에서 디코딩해야할 필요가 있어 json으로 넘기는데... 그때 디코딩처리를 해서 넘겨야
+
+
+            </pre>
+
+
+
+            <button onclick="test()">실행 확인</button>
+            <div id="area"></div>
+
+            <script>
+                function test(){
+                    let uri = "http://www.naver.com?test=한글입니다.";
+                    let esEncode = escape(uri);
+                    let enURI = encodeURI(uri);
+                    let enURIco = encodeURIComponent(uri);
+
+                    let area = document.getElementById("area");
+                    
+                    area.innerHTML= `escape : ${esEncode} <br>`
+                    area.innerHTML+= `encodeURI : ${enURI} <br>`
+                    area.innerHTML+= `encodeURIcomponent : ${enURIco} <br>`
+
+                    // %가 나오면 인코딩해서 넘어온 것이다.
+
+
+                    area.innerHTML+= `<br>unescape : ${unescape(esEncode)} <br>`
+                    area.innerHTML+= `decodeURI : ${decodeURI(enURI)} <br>`
+                    area.innerHTML+= `decodeURIcomponent : ${decodeURIComponent(enURIco)} <br>`
+                    
+
+
+                    
+
+
+                }
+            </script>
+
+            <pre>
+                16진수로 나오면 디코딩해야한다 정도로 생각하면 될 것 같다.
+                위의 친구들은 window객체에서 제공하는 
+            </pre>
+        </body>
+</html>

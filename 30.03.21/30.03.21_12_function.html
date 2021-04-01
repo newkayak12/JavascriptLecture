@@ -110,6 +110,7 @@
                         consolel.log("이건?");
 
                     }
+
                     // 이렇게 하면 밑에에서 덮어씀
                     // 함수 호이스팅?
                     // 두 개의 js파일로 함수명이 중복되면? > 찾아내서 수정해야함
@@ -169,7 +170,7 @@
                      */
                         console.log("--------호이스팅--------");
                         console.log(test);
-                        // Uncaught ReferenceError: test is not defined를 예상했으나 undefine이 나왔다. test가 있는 것은 알았다.
+                        // Uncaught ReferenceError: test is not defined를 예상했으나 undefined이 나왔다. test가 있는 것은 알았다.
                         // 페이지가 실행되면 페이지에 있는 변수명들만 싹다 읽어와서 undefined로 나오는 거라는 소리네
 
         /* 
@@ -210,7 +211,7 @@
 
                     // 그러면 익명함수의 호이스팅은?
                     
-                    // anoFunc();
+                    anoFunc();
                     // Uncaught TypeError: anoFunc is not a function
                     // undefined인데.. function처럼 써서 위의 문구가 출력되네요
 

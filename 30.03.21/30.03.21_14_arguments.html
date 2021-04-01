@@ -16,16 +16,28 @@
 
     <script>
         let arguTest=function(){ /* let arguTest=function(a,b,c){ 이렇게 넣어도 여러 개를 넣을 수 있다. arguments로 넣는다. */
-            console.log(arguments);
-                for(let i = 0; i<arguments.length; i++){
-                    console.log(arguments[i]);
+                if(arguments.length ==3){
                     
+                    console.log(arguments);
+                        for(let i = 0; i<arguments.length; i++){
+                            console.log(arguments[i]);
+                            
+                    }
+                } else {
+                    console.log("매개변수는 3개만 넣으세요");
+
+
+
                 }
         }
 
         arguTest(1,2,3,4,5);
         // 매개변수를 선언하지 않았는데도 던져진 값에 대해서 argument객체를 통해서 받아올 수 있다.
         arguTest(1,'김상현', true, function(){consol.log('test')});
+
+
+        // 매개변수를 체크할 때, 초과분에 대한 로직이 있다면 arguments객체를 이용하면 된다.
+        
 
     </script>
 </body>
