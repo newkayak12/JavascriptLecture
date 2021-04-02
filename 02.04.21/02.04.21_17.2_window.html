@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>window</title>
+        </head>
+        <body>
+            <h3>window.close()</h3>
+            <pre>
+                열린 창을 닫는 함수
+
+            </pre>
+            <button onclick="newWindow()">새 창 열기</button>
+            <button onclick="childClose()">자식창 닫기</button>
+             <script>
+                 let child;
+
+                 const newWindow = () => {
+                     child =  window.open("", "_blank", "height =300, width= 400");
+                     
+                     child.document.write("<h1>호호호호</h1>");
+                };
+
+                const childClose = () =>{
+                    child.close();
+                }
+
+             </script>
+            
+            <hr>
+
+             <h3>setTimeout()/ setInterval()</h3>
+
+             <pre>
+                 setTimeout( 로직(함수), 시간(miliSecond= 1/1000), 매개변수 ): 일정 시간 이후에 한 번만 특정한 로직함수 수행하도록 하는 함수 (ex_10초 후에 광고창 열어)== 딜레이를 주는 것
+                    _세번째 매개변수는 : 로직 실행 시 전달할 값.
+
+                 setInterval( 로직, 시간, 매개변수 ) : 로직을 실행하기 전, 일정 시간 간격으로 특정한 로직(함수)를 실행하는 것
+                    _세번째 매개변수는 : 로직 실행 시 전달할 값.
+
+
+                만약 얘네들을 특정 조건에 멈추고 싶을 때???
+                setTimeout()/ setInterval()의 실행을 멈출 수 있게 하는 함수
+                clearTimeout( setTimeout ) / clearInterval( setInterval ) 이렇게 두 개의 메소드가 있다. 
+
+                
+
+             </pre>
+
+             <button onclick="setTimeoutTest()">setTimeout test</button>
+             <button onclick="setintervalTest()">setInterval test</button>
+             <button onclick="stopInter()">stop</button>
+             <div id="container">
+                 <h1 id="count"></h1>
+             </div>
+
+             <script>
+                 let interId;
+                 
+                    
+                    const setTimeoutTest = () => {
+                            let child = open("","","width=300, height=300");
+                            child.alert('이 창은 3초 후 닫힙니다.');
+
+                        const timeId =  setTimeout( ()=>{
+                                child.close();
+                            } , 3000);
+
+                                console.log(timeId);
+                            clearTimeout(timeId);
+                    };
+
+                 
+
+
+                    const setintervalTest = () =>{
+                        let target =document.querySelector("div#container>h1#count");
+                        let count = 0;
+
+                        interId = setInterval(() => {
+                            target.innerHTML = count++;
+
+                        }, 1000);
+                    };
+                    
+                    const stopInter = ()=>{
+                        clearInterval(interId);
+                    };
+
+
+
+             </script>
+    <hr>
+
+             <h3>윈도우 크기, 위치 조정하기</h3>
+             <button onclick="winSizeCon()">크기</button>
+             <button onclick="winPositionCon()">위치</button>
+
+             <script>
+                 const winSizeCon = () =>{
+                     console.log(child);
+                     child.resizeTo( Math.floor(Math.random()*700), Math.floor(Math.random()*700) );
+                 };
+
+
+
+             </script>
+        </body>
+    </html>
