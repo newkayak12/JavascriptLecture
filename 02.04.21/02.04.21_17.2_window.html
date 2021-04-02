@@ -95,17 +95,51 @@
     <hr>
 
              <h3>윈도우 크기, 위치 조정하기</h3>
+
+             <pre>
+                 resizeTo(x,y) : 크기 조정
+                 moveTo(x,y) : 위치 이동
+             </pre>
+
              <button onclick="winSizeCon()">크기</button>
              <button onclick="winPositionCon()">위치</button>
-
+             <button onclick="inter()"> 동시 </button>
              <script>
+                 
                  const winSizeCon = () =>{
                      console.log(child);
                      child.resizeTo( Math.floor(Math.random()*700), Math.floor(Math.random()*700) );
-                 };
+                 }
 
+                 const winPositionCon = () => {
 
+                    child.moveTo( Math.floor(Math.random()*700), Math.floor(Math.random()*700) );
+                 }
+                  
+                 const inter = () =>{
+                    setInterval( () => {
+                        winSizeCon();
+                     winPositionCon();
+                    //  로직 여러 개 줄 수 있네
+                    }, 100)
 
+                 }
+
+                 onload = () => {document.getElementById("target").innerHTML="<h1>이거 추가</h1>";};
+                
+                // on~ : 이벤트임.. 그래서 함수로 처리하는...
              </script>
+<hr>
+              <h3>window _ onload</h3>
+              <pre>
+                  페이지에 있는 코드를 다 로드한 다음에 실행되는 이벤트
+                  onload는 페이지(window객체) 안에서 하나만 가능하다...
+                  밑에 하나 더 쓰면 덮어쓴다. 
+              </pre>
+
+              <div id="target"></div>
+
+
+              
         </body>
     </html>

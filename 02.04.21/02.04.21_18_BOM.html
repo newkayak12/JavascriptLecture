@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>BOM (Browser Object Model)</title>
+        </head>
+        
+        <body>
+                <h2>Bom</h2>
+               
+                <pre>
+                    <h2>&nbsp;&nbsp;&nbsp;&nbsp;브라우저가 갖고 있는 시스템 정보에 대해서</h2>
+                    <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;요청과 응답 : 웹프로그래밍이다. </h4>
+
+                    location 객체 : url에 뭔가 적으면 : 요청하는 것 _ / url에 대한 정보를 가져 올 수도 있다.
+
+                    navigator : 브라우저에 대한 정보 / 브라우저 코드명, 버젼, OS에 대한 정보까지 
+                </pre>
+
+                <hr>
+
+                <h2>screen</h2>
+                <pre>
+                    window객체의 property객체로 client화면에 대한 정보를 가지고 있는 객체 
+                </pre>
+
+                <button onclick="infoScreen()">스크린 객체 정보</button>
+                <div id="info"></div>
+
+            <script>
+
+                const infoScreen = () =>{
+                    let info = document.getElementById("info");
+                        console.log(screen);
+                        
+                        for( let key in screen){
+                            info.innerHTML += key +" : "+ screen[key]+"<br>";
+                        }
+                }
+            </script>
+
+                <hr>
+
+                <h2>navigator</h2>
+
+                <pre>
+                    window 객체의 property객체로 client의 browser 정보를 가지고 있는 객체
+                </pre>
+
+                <button onclick="infoNavi()">Navigator</button>
+                <div id="naviInfo"></div>
+                <div id="geolocation"></div>
+            <script> 
+                let nav;
+
+                let infoNavi = ()=>{
+
+                
+                    nav = document.getElementById("naviInfo");
+
+                        console.log(navigator);
+                        
+                        for( let key in navigator){
+                            nav.innerHTML += key +" : "+navigator[key] +"<br>";
+                        }
+
+                    navigator.geolocation.getCurrentPosition((position) => {
+                        console.log(position);
+                        
+                        document.getElementById("geolocation").innerHTML
+                        += "<br><br> 위도 : " + position.coords.latitude +" 경도 : "+position.coords.longitude;
+                    });
+
+
+
+                }
+            </script>
+                <h3>location</h3>
+                <pre>
+                    window객체로 property객체로 브라우저의 url정보를 가지고 있는 객체
+                    url정보를 변경하여 페이지를 이동할 수 있다. 
+                     
+                    * 주로 페이지 변경할 때 많이 쓴다. 
+                        1. 함수를 이용
+                            assign() : history가 남는다. (뒤로가기를 허용하는 곳)
+                            replace() : history가 안 남는다. (뒤로가기를 허용하면 안되는 지점에서 사용)
+                            reload()
+
+                        2. property를 변경
+                            location.href="주소"; : url 주소가 변경 됨 (다시, url에 값을 적는다 = 요청 무조건 응답이 있다. (htmlfile))
+                            (assing과 같다.)
+
+
+
+
+                </pre>
+                <button onclick="locationInfo()">location</button>
+                <div id="loc"></div>
+                
+                <hr>
+                <h3>페이지 이동 시키기</h3>
+                <h4>속성을 변경해서 페이지 이동</h4>
+                <button onclick="location.href = 'http://www.youtube.com'">youtube</button>
+                <h4>함수를 이용해서 페이지 이동</h4>
+                <button onclick="location.assign('http://www.iei.or.kr')">iei</button>
+                <button onclick="location.replace('http://www.netfilx.com')">netflix</button>
+            <script>
+                let loca = document.getElementById("loc");
+               
+                const locationInfo = () => {
+                    for(let k in loca){
+                        loca.innerHTML += k + " : " + loca[k]+"<br>";
+
+                    };
+                };
+
+
+            </script>
+            <hr>
+            <h4>f5버튼 만들기(reload)</h4>
+            <button onclick="location.reload">새로 고침</button>
+            <!-- 
+                페이지를 바꾸려면 다시 요청해서 바꿔줘야한다.(정적으로 띄워진 상태이기 때문에) 
+            -->
+
+
+            <h3>history 객체</h3>
+            <pre>
+                페이지 이동 이력을 관리 (무단 수정 안 됨 _ 브라우저가 관리)
+
+            </pre>
+
+            <button onclick="history.forward()">앞으로</button>
+            <button onclick="history.back()">뒤로 가기</button>
+            <script>
+                console.log(this.history);
+                // 뭐야
+            </script>
+
+                <br><br><br><br><hr>
+                <h5>그냥 해보세요</h5>
+                <h5>사이트로 이동</h5>
+                <input type="text" id="inputLink">
+                <button onclick="link()">이동</button>
+            <script>
+                link = () =>{
+                    let temp = document.getElementById("inputLink").value;
+                    // location.assign('http://'+temp);
+                    open('http://'+temp,"_blank");
+                }
+
+            </script>
+
+
+
+        </body>
+    </html>

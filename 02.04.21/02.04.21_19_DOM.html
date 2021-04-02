@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Dom(Document Object Model)</title>
+        </head>
+                
+        <body>
+            <h2>DOM : 문서를 객체화 한 모델</h2>
+                
+                  <pre>
+                    각각의 태그를 객체화 해서 객체처럼 쓰겠다.
+                    각 property들을 이용해서
+
+                    모든 노드 객체에 접근할 수 있는 요소와 메소드를 제공
+                     * 노드 : 요소 노드 / 텍스트 노드
+                            요소 노드 : 우리가 쓰는 태그 전체를 의미 _eg) p 안녕 /p, input 태그
+                            텍스트 노드 : 리터럴을 의미 _eg) '안녕'
+
+                    지금까지는 틀을 만들어 놓고 그걸 수정했다면
+                    지금부터는 script에서 태그를 통으로 만들어서 넣을 예정
+                    혹은 속성들을 수정할 것
+
+                    1. 요소 노드를 생성 : document.createElement(태그명);
+                        1.1 텍스트 노드가 없다면 속성 값으로 처리하므로, 객체명(변수).속성 = 속성 값
+                                                            , 객체명.setAttribute(속성명, 속성값)으로 추가
+                                                            
+                    2. 텍스트 노드를 생성 : document.createTextNode(내용);
+                    3. 두 가지를 연결해줘야한다. 요소노드 생성으로 p태그를 만들고 문구를 textnode로 만듦
+                        그 후 태그(부모) 안의 요소(자식)에 appendchild로 추가
+                    4. 원래 페이지 안에 appendchild로 위의 작업물을 첨부해준다. _ 즉 최소 하나의 태그는     존재해야 첨부할 수 있다.(body나... div나...)
+
+                    5. 문서 스타일 수정은 style객체를 이용하여 문서의 스타일 변경 : 객체명.style.속성명 = 속성 값
+
+
+                    0. 객체 제거 document.removeChild(객체명)
+
+---------------------------------------------------------------------------------------------
+                </pre>
+                <hr>
+                <hr>
+
+
+
+                    <h2>DOM</h2>
+                    <pre>
+                        html문서에 있는 태그들을 객체화해서 관리할 수 있게 한 객체
+                        DOM의 최상위는 window객체의 property객체로 document객체로 관리함.
+                    </pre>
+
+                <script>
+
+                            // console.log(document);
+                            // console.dir(document);
+                            // html이 계층구조로 되어있다. 
+
+                </script>
+
+                    <h3>태그를 동적으로 생성하기</h3>
+                    <pre>
+                        
+                        태그가 없는 상태였다가. 사용자의 움직임에 의해서 태그를 생성해내기
+                        document객체의 createElement( 태그명 ) 함수를 이용해서 요소 노드를 생성하고
+                        document객체의 createTextNode( 요소 ) 함수를 이용해서 텍스트 노드를 생성한다.
+
+                        * 단 텍스트 노드가 필요없는 요소(태그)는 생성하지 않는다. _eg input, img, video, audio 등 단일 태그
+
+                        노드 간 연결을 해줘야한다. Element(부모 노드).appenChild(자식 노드) 함수를 이용해서.
+                        태그 안에 다른 태그가 들어갈 수 있으므로 자식노드에 텍스트 노드가 확정적으로 들어가는 것이 아니다. 
+                        
+                        
+                        --------------------------------------------------- 여기까지는 메모리 상에 존재
+
+                        여기부터 메모리에서 페이지로 올리는 작업. 
+
+                        페이지에 실제 있는 태그를 불러와서 그 태그와 연결을 해줘야한다. 
+                    </pre>
+
+
+                    <h2>textnode가 있는 태그 생성하기</h2>
+
+                    <button onclick="createTag()">태그 생성하기</button>
+                    <button onclick="h2tag()">h2추가</button>
+                    <br>
+                    <!-- 클라이언트가 선택한 태그와 문구를 생성해주는 기능 -->
+                    <div>
+                        <select name="option" id="option">
+                            <option value="p">p</option>
+                            <option value="h3">h3</option>
+                            <option value="h2">h2</option>
+                            <option value="h1">h1</option>
+                        </select>
+
+                        <input type="text" id="content">
+                        <button onclick="userMade()"> userMade</button>
+                    </div>
+                    
+                    <br>
+                    <div id="container"></div>
+
+                
+                <script>
+                    const userMade = ()=>{
+                        let cate = document.getElementById("option").value;
+                            // console.log(cate);
+                        let input = document.getElementById("content").value;
+                            // console.log(input);
+                        let ele = document.createElement(cate);
+                        let inp = document.createTextNode(input);
+                        ele.appendChild(inp);
+                        document.getElementById('container').appendChild(ele);
+
+                    }
+
+
+                    // 텍스트 노드가 있는
+                    let container = document.getElementById("container");
+
+                    const h2tag = () => {
+                        let h2 = document.createElement("h2");
+                        let h2txt = document.createTextNode("h2입니다.");
+                       
+                        h2.appendChild(h2txt);
+                        
+                        container.appendChild(h2);
+                    }
+
+                    const createTag = () => {
+                        
+                        // 1. 요소 노드를 생성하기
+                        let child = document.createElement("p");
+                        
+                        // 2. 텍스트 노드를 생성하기 
+                        let childText = document.createTextNode("안녕하세요?");
+                        
+                        // 3. 요소 노드 안에 텍스트 노드 삽입
+                        child.appendChild(childText);
+                        
+                        container.appendChild(child);
+
+                    }
+
+
+                </script>
+
+
+                    <h2>textnode가 없는 태그 생성하기</h2>
+                    <pre>
+
+                        input, img, video, audio... 의 태그들이 여기에 해당한다.
+                        텍스트 노드가 없기 때문에 요소노드만 생성을 하고, 
+                        태그의 속성을 설정을 해줘야함. 
+
+                    </pre>
+
+
+                    <button onclick="newImage()">add image</button>
+                    <div id="imageContainer"></div>
+
+
+                <script>
+                    const newImage = () =>{
+                        // 1. 요소노드 만들기
+                        let img = document.createElement("img");
+                            // console.log(img);
+                            // log> dir 순으로 다 찍어봐
+                        
+                        // 2. 요소에 필요한 속성을 설정하기
+                        // img scr가 있어야겠죠? 
+                            //  - 1 함수를 이용하는 방식 : setAttribute
+                            //  - 2 속성에 직접 접근하는 방식 : target.color = black;
+                       
+                            //    1. 함수
+                        img.setAttribute("scr", "https://file.namu.moe/file/8bc9e381797334eb33da66e3ba501be1fd5d34293e5de44a1b640f4269f657d08f04e4bcc07e4b0aeb1412aae5fa7107ab56741564888d319e8a3b1efa54212861d4366074c95a056174f154b0dd9c6598e13898e27d86bb418427078e7ff20b");
+                        img.setAttribute("width", "200");
+                        img.setAttribute("height", "200");
+                            console.log(img);
+
+                                
+                            //    2. 직접접근
+                                
+                        // img.src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRT5SxT4cXwZAcSKmyAe3VoogFrdJ2q9p5XWQ&usqp=CAU";
+                            // console.log(img.src);
+
+
+                        //  3. 페이지에 있느 ㄴ요소 추가/ 연결
+                        document.getElementById("imageContainer").appendChild(img);
+
+
+                    }
+                </script>
+
+<!-- 입력받는 태그를 추가해보라고? -->
+                <br><br>
+                <button onclick="intagTest()">add Input</button>
+                <div id="test"></div>
+
+                <script>
+                    const intagTest = () =>{
+                        let el = document.createElement("input");
+                        el.setAttribute("type", "text");
+
+                        document.getElementById("test").appendChild(el);
+
+
+
+                    }
+
+                </script>
+                
+                
+        </body>
+    </html>
