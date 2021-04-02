@@ -193,23 +193,100 @@
                 </script>
 
 <!-- 입력받는 태그를 추가해보라고? -->
-                <br><br>
-                <button onclick="intagTest()">add Input</button>
-                <div id="test"></div>
+                    <br><br>
+                    <button onclick="intagTest()">add Input</button>
+                    <div id="test"></div>
 
                 <script>
+                    let count = 0;
                     const intagTest = () =>{
                         let el = document.createElement("input");
                         el.setAttribute("type", "text");
+                        el.setAttribute("name", "name"+(count++));
 
                         document.getElementById("test").appendChild(el);
-
-
 
                     }
 
                 </script>
-                
+
+
+                    <h3>태그 안에 태그가 있는 태그 만들기</h3>
+                    <pre>
+
+                        목록, 태이블, div 안에 태그 넣기
+
+                    </pre>
+
+                    <button onclick="listMaker()">listMaker</button>
+
+                    <div id="list"></div>
+
+                    
+                    <input type="number" name="" id="row">
+                    <input type="number" name="" id="column">
+                    <button onclick="tableMaker()">tableMaker</button>
+                    
+                    <div id="table"></div>
+
+
+                <script>
+                    const tableMaker = ()=> {
+                        let row = document.getElementById("row").value;
+                        let column = document.getElementById("column").value;
+
+
+                        console.log(row);
+                        console.log(column);
+
+                        let countj =0;
+                        let count =0;
+                        
+                            for(let j=0; j<row; j++){
+                                let tr = document.createElement("tr");
+                                tr.setAttribute("id","tr"+count);
+
+                                for(let i = 0; i<column; i++){
+                                    let td= document.createElement("td");
+                                    td.setAttribute("style","border: 1px black solid; width: 100px; height: 100px; text-align: center; vertical-align :middle;");
+                                        td.setAttribute("id", "td"+count);
+                                        let txt = document.createTextNode(count+1);
+                                        td.appendChild(txt);
+                                        tr.appendChild(td);
+
+                                        ++count;
+                                    }
+
+                                    ++countj;
+                                    document.getElementById("table").appendChild(tr);
+                                }
+
+                            }
+
+                            
+
+
+                    const listMaker = ()=>{
+                        let count = 0;
+                        let ul = document.createElement("ul");
+                        ul.setAttribute("id","ul");
+                            
+                            for(let i = 0; i<4; i++){
+                                let li = document.createElement("li");
+                                li.setAttribute("id","li"+count);
+                                ul.appendChild(li);
+                                let text = document.createTextNode(count+1);
+                                li.appendChild(text);
+                                ++count;
+                            }
+                        
+                        document.getElementById("list").appendChild(ul);
+                            console.log(ul);
+
+                    }
+
+                </script>
+
                 
         </body>
     </html>
