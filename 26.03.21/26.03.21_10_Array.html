@@ -363,8 +363,11 @@
                     return 180<v;
                 }
 
-
-                let finder = height.find(f);
+                    console.log("여기");
+                // let finder = height.find(f);
+                let finder = height.find((v) => {
+                    return 180<v;
+                })
                     console.log(`result ${height}`);
                     console.log(`find ${finder}`);
                     // 하나만 찾고 마네?

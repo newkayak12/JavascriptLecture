@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title> task </title>
+        </head>
+        <body>
+
+
+            <h2>문제1</h2>
+            <input type="number" name="" id="row">
+            <input type="number" name="" id="column">
+            <button onclick="tableMaker()">tableMaker</button>
+            
+            <div id="table"></div>
+
+
+        <script>
+            const tableMaker = ()=> {
+                let row = document.getElementById("row").value;
+                let column = document.getElementById("column").value;
+
+                let countj =0;
+                let count =0;
+                
+                    for(let j=0; j<row; j++){
+                        let tr = document.createElement("tr");
+                        tr.setAttribute("id","tr"+count);
+
+                            for(let i = 0; i<column; i++){
+                                    let td= document.createElement("td");
+
+                                    td.setAttribute("style","border: 1px black solid; width: 100px; height: 100px; text-align: center; vertical-align :middle;");
+                                    td.setAttribute("id", "td"+count);
+                                    
+                                
+                                    let txt = document.createTextNode(count+1);
+                                    td.appendChild(txt);
+                                    tr.appendChild(td);
+
+                                    ++count;
+                                }
+
+                            ++countj;
+                            document.getElementById("table").appendChild(tr);
+                        }
+
+                    }
+
+        </script>
+        <br>
+        <hr>
+            <h2>문제2</h2>
+            <div id="box"></div>
+            <input type="color" name="" id="colorpicker"> <button onclick="colorChange()">변경</button>
+            <br>
+            <button onclick="size50()">50x50</button>
+            <button onclick="size100()">원본(100x100)</button>
+            <button onclick="size200()">200x200</button>
+
+            
+        
+
+        <style>
+            #box{
+                width: 100px;
+                height: 100px;
+                border: 1px black solid;
+            }
+        </style>
+
+        <script>
+            let box = document.getElementById("box");
+            
+            let colorChange = () =>{
+                let input = document.getElementById("colorpicker").value;
+                box.style.backgroundColor = input;
+            }
+
+            let size50 = () =>{
+                box.setAttribute("style", "width: 50px; height:50px;")
+                console.log(box);
+            
+            }
+
+            let size100 = () =>{
+                box.setAttribute("style", "width: 100px; height:100px;")
+                console.log(box);
+            
+            }
+
+            let size200 = () =>{
+                box.setAttribute("style", "width: 200px; height:200px;")
+                console.log(box);
+            
+            }
+
+        </script>
+
+        <br>
+        <hr>
+            <h2>문제3</h2>
+            구매자 : <input type="text" name="" id="buyer" placeholder="구매자의 이름을 입력하세요"> 
+            <br>
+            상품명 : <input type="text" name="" id="content" placeholder="구매 상품명을 입력하세요">
+            <br>
+            가&nbsp;&nbsp;&nbsp;&nbsp;격 : <input type="text" name="" id="price" placeholder="구매 가격을 입력하세요">
+            <br><br>
+            <button onclick="submit()">입력 값 출력하기</button>
+            <br><br>
+            <div id="contentbox"></div>
+
+        <style>
+            #contentbox{
+                width: 300px;
+                height: 150px;
+                background-color: burlywood;
+                border: 1px black solid;
+            }
+        </style>
+        <script>
+            let contentbox = document.getElementById("contentbox");
+            let submit = () =>{
+                let buyer = document.getElementById("buyer").value;
+                let content = document.getElementById("content").value;
+                let price = document.getElementById("price").value;
+
+                let p = document.createElement("p");
+                let txt = document.createTextNode("구입자 : " + buyer);
+                
+                let p1 = document.createElement("p");
+                let txt1 = document.createTextNode("구매상품 :  " + content);
+                
+                let p2 = document.createElement("p");
+                let txt2 = document.createTextNode("구매가격 : " + price);
+                
+                p.appendChild(txt);
+                p1.appendChild(txt1);
+                p2.appendChild(txt2);
+
+                contentbox.appendChild(p);
+                contentbox.appendChild(p1);
+                contentbox.appendChild(p2);
+                
+                
+            }
+        </script>
+        <br><hr>
+            <h2>문제4</h2>
+            <fieldset>
+                <legend>보기</legend>
+                <input type="text" name="" id="length" placeholder="문자를 작성하세요" style="width: 500px;">
+            </fieldset>
+
+            <div id="boxx" style="border: 1px red solid; height: 150px; margin-top: 20px;">
+
+            </div>
+            
+             <button onclick="lcheck()"> 확인하기 </button>
+            <br><br>
+             <fieldset>
+                 <legend>보기</legend>
+                 <p id="plist">콜라,사이다,햄버거,피자,한약</p>
+             </fieldset>
+
+             <div id="boxx2" style="border: 1px red solid; height: 150px; margin-top: 20px;">
+            </div>
+            <button onclick="lcheck2()"> 확인하기 </button>
+
+        <script>
+            let boxer = document.getElementById("boxx");
+            let boxer2 = document.getElementById("boxx2");
+            
+            const lcheck = () => {
+                let txt = document.getElementById("length").value;
+                let txtLength = (txt.replace(" ", "")).length;
+                boxer.innerHTML = "보기의 문자열 길이는 "+txtLength+"글자 입니다.";
+            }   
+            
+            const lcheck2 = () =>{
+                let txtp = document.getElementById("plist").innerText;
+                let t = txtp.split(",");
+                    for(let i = 0; i<t.length; i++){
+                        
+                        boxer2.innerHTML += i+1+"." +t[i] +"<br>"
+                        
+                        
+                    }
+
+            }
+            
+        </script>
+        <br><br><hr>
+            <h2>문제5</h2>
+
+            <div style="border: 1px black solid; width: 400px;">
+                <h3>간이 계산기 만들기</h3>
+                첫 번째 값: <input type="number" name="" id="fir">
+                <br>
+                두 번째 값: <input type="number" name="" id="sec">
+                <br>
+                <div id="operate">
+                    <input type="button" value="+" onclick="oper(this.value)">
+                    <input type="button" value="-" onclick="oper(this.value)">
+                    <input type="button" value="x" onclick="oper(this.value)">
+                    <input type="button" value="/" onclick="oper(this.value)">
+                    <input type="button" value="%" onclick="oper(this.value)">
+                </div>
+                
+
+                <p id="result"></p>
+            </div>
+
+            <script>
+                const oper = (value) =>{
+
+                    let firNum = document.getElementById("fir").value;
+                    let secNum = document.getElementById("sec").value;
+                    // let result = document.getElementById("result").innerHTML;
+                    let result = "계산 결과 : ";
+                        switch (value){
+                            case "+" :
+                                 result += Number(firNum)+Number(secNum);
+                                 document.getElementById("result").innerHTML = result;
+                                break;
+                            case "-" : 
+                                 result += Number(firNum)-Number(secNum);
+                                 document.getElementById("result").innerHTML = result;
+                                
+                                break;
+                            case "x" : 
+                                 result += Number(firNum)*Number(secNum);
+                                 document.getElementById("result").innerHTML = result;
+                                break;
+                            case "/" : 
+                                 result += Number(firNum)/Number(secNum);
+                                 document.getElementById("result").innerHTML = result;
+                                break;
+                            case "%" :
+                                 result += Number(firNum)%Number(secNum);
+                                 document.getElementById("result").innerHTML = result;
+                                break;
+                        }
+
+                }
+
+                
+
+            </script>
+
+            <br><hr>
+                <h2>문제6</h2>
+                <fieldset>
+                    <legend>보기</legend>
+
+                    <label for="" id="la1">사과,바나나,당근</label><br>
+                    <label for="" id="la2">김밥,치즈,떡볶이,햄버거</label><br>
+                    <label for="" id="la3">환타,사이다,콜라</label><br>
+                    <label for="" id="la4">고양이,강아지</label><br>
+
+                </fieldset>
+
+                <input type="text" name="" id="find" style="width: 400px; margin: 10px 0px 10px 0px;">
+                <br>
+                <button onclick="pro6bu()">전송 및 처리</button>
+
+            <script>
+                
+                const pro6bu = () =>{
+                    let lis = new Array(4);
+                    lis[0] = (document.getElementById("la1").innerHTML).split(",");
+                    lis[1] = (document.getElementById("la2").innerHTML).split(",");
+                    lis[2] = (document.getElementById("la3").innerHTML).split(",");
+                    lis[3] = (document.getElementById("la4").innerHTML).split(",");
+
+                    let result ;
+                    let count ; 
+
+                        console.log(lis[0]);
+                        console.log(lis[1]);
+                        console.log(lis[2]);
+                        console.log(lis[3]);
+                    let keyword = document.getElementById("find").value;
+                    console.log(keyword);
+                        for(let i =0; i<lis.length; i++){
+                            result  = lis[i].filter((v)=>{
+                            count = i+1;
+
+                                return keyword == v;
+                            
+                            });
+                        
+                        if(result !=""){
+                            alert(result+"는 배열 index " +count+"번 째에 존재합니다.")
+                        } else {
+                            alert('존재하지 않습니다.')
+                        }
+                    }
+                }
+            </script>
+
+            <br><hr>
+                <h2>문제7</h2>
+                <fieldset>
+                    <legend>보기</legend>
+                    <label for="" id="stringla1">r b</label><br>
+                    <label for="" id="stringla2">e v o l</label><br>
+                </fieldset>
+
+                <div id="pro7res">
+
+                </div>
+                <button onclick="pro7result()" style="margin: 10px 0px 0px 3px;">처리</button>
+
+            <script>
+                const pro7result = () => {
+                    let st1 = document.getElementById("stringla1").innerHTML;
+                    let st2 = document.getElementById("stringla2").innerHTML;
+                    let st1arr = st1.split(" ");
+                    let st2arr = st2.split(" ");
+                    st1arr.reverse();
+                    st2arr.reverse();
+                    st1 = st1arr.join().replace(",","");
+                    st2 = st2arr.join()
+                        for(let i=0; i<st2arr.length; i++){
+                                st2= st2.replace(",",""); 
+                        }
+                    // st1 = st1.reverse();
+                    // st2 = st2.reverse();
+                    console.log(st1);
+                    console.log(st2);
+                    
+                    document.getElementById("pro7res").innerHTML = st1+st2;
+                    document.getElementById("pro7res").setAttribute("style", "border : 1px black solid; margin: 10px 0px 0px 4px;");
+                }
+                
+            </script>
+            <br><hr>
+                <h2>문제8</h2>
+                <fieldset>
+                    <legend>입력</legend>
+                    <input type="text" name="" id="pro8input">
+                    <button onclick="pro8addlist()">입력</button>
+
+                </fieldset>
+
+                <div id="pro8result">
+
+                </div>
+                <button onclick="pro8print()">출력</button>
+
+            <script>
+                let list8 = [];
+                const pro8addlist =() =>{
+                    
+                    let content = document.getElementById("pro8input").value;
+                    list8.push(content);
+                    console.log(list8);
+                }
+
+                const pro8print = () => {
+                    document.getElementById("pro8result").innerHTML= list8;
+                }
+            </script>
+            <br><hr>
+                <h2>문제9</h2>
+                <fieldset>
+                    <legend>보기</legend>
+                    <p id="pro9screen">피자 치킨 당근 햄버거 떡볶이</p>
+                </fieldset>
+                <input type="text" id="pro9Del" placeholder="삭제할 음식 이름을 입력하세요">
+                <input type="text" id="pro9Add" placeholder="추가할 음식 이름을 입력하세요"><br>
+
+                <div id="pro9result">
+
+                </div>
+
+                <button onclick="pro9submit()"> 처리 및 출력 </button>
+            <script>
+                let pro9List =[];
+                const pro9submit= () =>{
+                    let pro9txt = document.getElementById("pro9screen").innerHTML;
+                    let pro9Del = document.getElementById("pro9Del").value;
+                    let pro9Add = document.getElementById("pro9Add").value;
+                    
+
+
+                    pro9List = pro9txt.split(" ");
+                        // console.log(pro9List);
+                        // console.log(pro9List.indexOf(proDel));
+                        // console.log(pro9Add);
+                        // console.log(pro9List);
+
+                        for(let i=0; i<pro9List.length; i++){
+                            if(pro9Del == pro9List[i]){
+
+                                pro9List.splice(pro9List.indexOf(pro9Del),1);
+                            }
+                        }
+
+                    pro9List.push(pro9Add);
+                        console.log(pro9List);
+
+                    document.getElementById("pro9result").innerHTML  = pro9List;
+
+                }
+            </script>
+            <br><hr>
+                <h2>문제10</h2>
+                <fieldset id="pro10">
+                    <legend>검색할 항목을 선택하세요</legend>
+                    <input type="radio" name="check" id="title" onclick="_title10()">제목
+                    <input type="radio" name="check" id="date"onclick="_date10()">날짜
+                    <input type="radio" name="check" id="writer"onclick="_writer10()">작성자
+                </fieldset>
+                <hr>
+                <div id="title10">
+                    &nbsp;&nbsp;검색할 제목을 입력하세요 : <br>
+                    &nbsp;&nbsp;<input type="text" style="width: 400px;">
+                    <button>검색</button>
+
+                </div>
+                <div id="date10">
+                    &nbsp;&nbsp;검색할 날짜를 입력하세요 : <br>
+                    &nbsp;&nbsp;<input type="date" style="width: 200px;"> - <input type="date" style="width: 200px;"> <button>검색</button>
+                </div>
+                <div id="writer10">
+                    &nbsp;&nbsp;검색할 작성자 아이디를 입력하세요 : <br>
+                    &nbsp;&nbsp;<input type="text" style="width: 400px;">
+                    <button>검색</button>
+                </div>
+
+                <style> 
+                    
+                    #pro10{
+                        text-align: center;
+                        background-color: lightgray;
+                        
+                    }   
+                    #pro10 input{
+                        margin-left: 30px;
+                    }
+                    #title10{
+
+                        background-color: goldenrod;
+                        display: none;
+                    }
+                    #date10{
+                        
+                        height: 50px;
+                        background-color: goldenrod;
+                        display: none;
+                    }
+                    #writer10{
+
+                        background-color: goldenrod;
+                        display: none;
+                    }
+                </style>
+
+                <script>
+                    const _title10 =()=>{
+                        document.getElementById("title10").style.display="block";
+                        
+                        document.getElementById("date10").style.display="none";
+                        
+                        document.getElementById("writer10").style.display="none";
+                    }
+                    const _date10 =()=>{
+                        document.getElementById("title10").style.display="none";
+                        
+                        document.getElementById("date10").style.display="block";
+                        
+                        document.getElementById("writer10").style.display="none";
+
+                    }
+                    const _writer10 =()=>{
+                        document.getElementById("title10").style.display="none";
+                        
+                        document.getElementById("date10").style.display="none";
+                        
+                        document.getElementById("writer10").style.display="block";
+                    }
+
+                </script>
+                <br><hr>
+                    <h2>문제11</h2>
+                    <fieldset style=" width: 600px; height: 100px;">
+                        <legend style="color: red; font-weight: bold;">출력창</legend>
+                        <p id="p11">
+                            
+                        </p>
+                        
+                    </fieldset>
+                    <br>
+                    <button onclick="prompt11()">입력</button>
+                    <button onclick="print11()">출력</button>
+                <script>
+                    let name;
+                    let age;
+                    let address;
+                    
+                    const prompt11 = () =>{
+
+                        name = prompt("이름 입력","");
+                        age = prompt("나이 입력","");
+                        address = prompt("주소 입력", "");
+
+                        
+                    }
+
+                    function Obj(_name, _age, _address){
+                        
+                        this.objName = _name;
+                        this.objAge = _age;
+                        this.objAddress = _address;
+                        
+
+
+
+                        this.getName = function(){
+                            return this.objName;
+                        }
+                        this.getAge = function(){
+                            return this.objAge;
+                        }
+                        this.getAddress = function(){
+                            return this.objAddress
+                        }
+                    }
+
+                    const print11 = () =>{
+                        let objMaker =  new Obj(name, age, address);
+
+                        document.getElementById("p11").innerHTML="이름 : "+objMaker.getName()+"<br>나이 : "+objMaker.getAge()+"<br> 주소 : "+objMaker.getAddress();
+                        console.log(obj);
+                    }
+
+
+                </script>
+
+                <br><hr>
+
+            
+                    <h2>문제12</h2>
+                    <div id="table12" >
+                       
+                            <button onclick="tableMaker12()" >입력 및 출력</button>
+                        </div>
+                    </div>
+                    
+                    
+                <style>
+                    #table12{
+                        /* text-align: center; */
+                        align-content: center;
+                    }
+                    #mainT {
+                        width: 500px;
+                        height: 100px;
+                        border: 1px black solid;
+                        text-align: center;
+                    }
+                    #mainT th{
+                        border: 1px black solid;
+
+                    }
+
+                    #mainT td{
+                        border: 1px black solid;
+                    }
+                </style>
+                    
+                <script>
+                        let header = ["이름","나이","주소"];
+                        
+
+                       
+
+                    function Member(_name, _age, _address){
+                        this.name = _name;
+                        this.age = _age;
+                        this.address = _address;
+
+                        this.get1 = function(){
+                            return this.name;
+                        }
+                        this.get2 = function(){
+                            return this.age;
+                        }
+                        this.get3 = function(){
+                            return this.address;
+                        }
+                    }
+
+                    let tableMaker12 = ()=>{
+
+                        let tab12 = document.createElement("table");
+                        tab12.setAttribute("id","mainT");
+
+                            for(let i =0; i<4; i++){
+                                let tr12 = document.createElement("tr");
+                                   
+                                       if(i==0){
+                                           let th12 = document.createElement("th");
+                                           let th12Con = document.createTextNode("이름");
+                                           th12.appendChild(th12Con);
+                                           tr12.appendChild(th12);
+
+                                           th12 = document.createElement("th");
+                                           th12Con = document.createTextNode("나이");
+                                           th12.appendChild(th12Con);
+                                           tr12.appendChild(th12);
+
+                                           th12 = document.createElement("th");
+                                           th12Con = document.createTextNode("주소");
+                                           th12.appendChild(th12Con);
+                                           tr12.appendChild(th12);
+
+                                           
+   
+                                       } else {
+
+                                        let m = new Member(prompt("이름", ""),prompt("나이", ""),prompt("주소", ""));
+
+
+                                        let td12 = document.createElement("td");
+                                        let td12Con = document.createTextNode(m.get1());
+                                        td12.appendChild(td12Con);
+                                        tr12.appendChild(td12);
+                                        
+                                        td12 = document.createElement("td");
+                                        td12Con = document.createTextNode(m.get2());
+                                        td12.appendChild(td12Con);
+                                        tr12.appendChild(td12);
+   
+
+                                        td12 = document.createElement("td");
+                                        td12Con = document.createTextNode(m.get3());
+                                        td12.appendChild(td12Con);
+                                        tr12.appendChild(td12);
+
+                                       }
+
+                                       tab12.appendChild(tr12);
+
+                                   }
+
+                                   
+                                   let cap12 = document.createElement("caption");
+                                   cap12.setAttribute("style","width:500px;color:red;");
+                                   let cap12Con = document.createTextNode("학생정보 테이블");
+                                   cap12.appendChild(cap12Con);
+
+                                   let main = document.getElementById("table12");
+                                   main.insertBefore(tab12, but12);
+                                   main.insertBefore(cap12,but12)
+
+                            }   
+
+                        
+                        
+                        
+                      
+
+
+                                
+                                
+                                
+                                
+                                
+                            
+                            
+                            
+                            
+                            </script>
+
+
+    </body>
+
+    </html>

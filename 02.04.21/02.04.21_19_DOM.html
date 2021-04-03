@@ -30,7 +30,7 @@
                     2. 텍스트 노드를 생성 : document.createTextNode(내용);
                     3. 두 가지를 연결해줘야한다. 요소노드 생성으로 p태그를 만들고 문구를 textnode로 만듦
                         그 후 태그(부모) 안의 요소(자식)에 appendchild로 추가
-                    4. 원래 페이지 안에 appendchild로 위의 작업물을 첨부해준다. _ 즉 최소 하나의 태그는     존재해야 첨부할 수 있다.(body나... div나...)
+                    4. 원래 페이지 안에 appendchild로 위의 작업물을 첨부해준다. _ 즉 최소 하나의 태그는 존재해야 첨부할 수 있다.(body나... div나...)
 
                     5. 문서 스타일 수정은 style객체를 이용하여 문서의 스타일 변경 : 객체명.style.속성명 = 속성 값
 
@@ -118,14 +118,7 @@
                     // 텍스트 노드가 있는
                     let container = document.getElementById("container");
 
-                    const h2tag = () => {
-                        let h2 = document.createElement("h2");
-                        let h2txt = document.createTextNode("h2입니다.");
-                       
-                        h2.appendChild(h2txt);
-                        
-                        container.appendChild(h2);
-                    }
+                   
 
                     const createTag = () => {
                         
@@ -140,6 +133,16 @@
                         
                         container.appendChild(child);
 
+                    }
+
+
+                    const h2tag = () => {
+                        let h2 = document.createElement("h2");
+                        let h2txt = document.createTextNode("h2입니다.");
+                       
+                        h2.appendChild(h2txt);
+                        
+                        container.appendChild(h2);
                     }
 
 
@@ -235,10 +238,6 @@
                         let row = document.getElementById("row").value;
                         let column = document.getElementById("column").value;
 
-
-                        console.log(row);
-                        console.log(column);
-
                         let countj =0;
                         let count =0;
                         
@@ -246,16 +245,17 @@
                                 let tr = document.createElement("tr");
                                 tr.setAttribute("id","tr"+count);
 
-                                for(let i = 0; i<column; i++){
-                                    let td= document.createElement("td");
-                                    td.setAttribute("style","border: 1px black solid; width: 100px; height: 100px; text-align: center; vertical-align :middle;");
-                                        td.setAttribute("id", "td"+count);
-                                        let txt = document.createTextNode(count+1);
-                                        td.appendChild(txt);
-                                        tr.appendChild(td);
+                                    for(let i = 0; i<column; i++){
+                                            let td= document.createElement("td");
+                                            td.setAttribute("style","border: 1px black solid; width: 100px; height: 100px; text-align: center; vertical-align :middle;");
+                                            td.setAttribute("id", "td"+count);
+                                        
+                                            let txt = document.createTextNode(count+1);
+                                            td.appendChild(txt);
+                                            tr.appendChild(td);
 
-                                        ++count;
-                                    }
+                                            ++count;
+                                        }
 
                                     ++countj;
                                     document.getElementById("table").appendChild(tr);
