@@ -287,6 +287,26 @@
 
                 </script>
 
+<hr>    
+                    <h2>파일업로드</h2>
+                   <div id="fileup" >
+                    <input type="file" name="file0" id="">
+                       <button onclick="fileup()">추가</button>
+                   </div>
+
+                <script>
+                    let count = 1;
+                    const fileup = () =>{
+                        let box = document.getElementById("fileup");
+                        let inputCreate = document.createElement("input");
+                        inputCreate.setAttribute("type","file");
+                        inputCreate.setAttribute("name","file"+(count++));
+                        inputCreate.setAttribute("style","display :block;")
+                        box.appendChild(inputCreate);
+                    }
+
+                </script>
+
                 
         </body>
     </html>
