@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>DOM</title>
+        </head>
+        <!-- 
+            대부분 이벤트 기반으로 이뤄져있다.
+            
+         -->
+         <body>
+            <h2>생성된 태그를 원하는 위치에 넣기</h2>
+            <pre>
+                insertAdjacentElement("예약어", 태그);
+                예약어 : 
+                 - beforebegin :지정 태그의 앞 (형제)
+                 - afterend : 지정 태그의 뒤 (형제)
+                 - beforeend : 지정 태그의 맨 밑 자식(==appenChild)
+                 - afterbegin : 지정 태그의 맨 위 자식
+                 - 
+            </pre>
+
+            <button onclick="beforeendTest()">맨 마지막 자식</button>
+            <button onclick="afterbeginTest()">맨 앞 자식</button>
+
+            <button onclick="beforebeginTest()">지정 태그 앞</button>
+            <button onclick="afterendTest()">지정 태그 뒤</button>
+
+            <div id="childTest">
+                
+                <h2>기준!</h2>
+
+            </div>
+
+            <script>
+                
+                const beforebeginTest = () =>{
+                    let parent = document.getElementById("childTest");
+                    let p = document.createElement("p");
+                    let txt = document.createTextNode("추가했습니다. beforebegin");
+                    p.appendChild(txt);
+
+                    parent.insertAdjacentElement("beforebegin",p);
+                }
+                const afterendTest = () =>{
+                    let parent = document.getElementById("childTest");
+                    let p = document.createElement("p");
+                    let txt = document.createTextNode("추가했습니다. afterend");
+                    p.appendChild(txt);
+
+                    parent.insertAdjacentElement("afterend",p);
+                }
+
+
+                const beforeendTest = () =>{
+                    let parent = document.getElementById("childTest");
+                    let p = document.createElement("p");
+                    let txt = document.createTextNode("추가했습니다. beforeEnd");
+                    p.appendChild(txt);
+
+                    parent.insertAdjacentElement("beforeend",p);
+                }
+
+                const afterbeginTest = () =>{
+                    let parent = document.getElementById("childTest");
+                    let p = document.createElement("p");
+                    let txt = document.createTextNode("추가했습니다.afterBegin");
+                    p.appendChild(txt);
+
+                    parent.insertAdjacentElement("afterbegin",p);
+                }
+            </script>
+            <br><hr>
+
+            <h2>생성된 태그에 style속성 조작하기</h2>
+            <pre>
+                생성된 태그 객체에 style이라는 property가 있음 이를 이용해서 태그의 스타일을(css)를 지정할 수 있다.
+                1. element 객체의 property는 직접접근이 가능하다 태그.style.style속성명으로 대입해서 사용한다.
+                2. element 객체의 setAttribute 함수를 이용해서 style속성 설정/변경 가능
+                * style속성을 설정할 때는 '-' 가 들어간 속선은 '-' 다음 영문을 대문자로 변경해서 사용.
+
+            </pre>
+            <button onclick="styleTest1(this)">직접 접근</button>
+            <button onclick="styleTest2(this)">setAttribute 이용</button>
+
+            <script>
+                const styleTest1 = (e) =>{
+                    let el = document.createElement("img");
+                    console.log(el);
+                    console.dir(el);
+                    el.src="https://lh3.googleusercontent.com/proxy/dwm_WJt64Tr_rYZM5wrpR60vZ6AefgX68KXDGC9x1Rs5jLFcOMHzVAQBuG9_xF2SfilIeqKvEOinDZo_rtmFJjYgtX2FMVpcjwSRqNyg4saatELQhhQtfgaGpdYMJ1qClvdOOX1lZGuyKdo";
+                    el.style.height="300px";
+                    el.style.widows="300px";
+                    el.style.borderRadius="80px";   
+
+                    e.insertAdjacentElement("afterend", el);
+
+                }
+
+                const styleTest2 = (e) =>{
+                    let el = document.createElement("img");
+                    console.log(el);
+                    console.dir(el);
+                    el.src="https://lh3.googleusercontent.com/proxy/dwm_WJt64Tr_rYZM5wrpR60vZ6AefgX68KXDGC9x1Rs5jLFcOMHzVAQBuG9_xF2SfilIeqKvEOinDZo_rtmFJjYgtX2FMVpcjwSRqNyg4saatELQhhQtfgaGpdYMJ1qClvdOOX1lZGuyKdo";
+                    el.setAttribute("stye","height:100px; width:200px;  border-Radius:80px;")
+
+                    e.insertAdjacentElement("afterend", el);
+                }
+
+            </script>
+
+            <br><hr>
+           
+                <h2>특정 태그에서 원하는 검색 탐색하기</h2>
+                <pre>
+                    특정 태그를 가져와 그 태그가 가지고 있는 자식 태그 확인하기
+                    Element객체에 property로 자식, 형제의 값을 가지고 있다.
+                    
+                    children 속성 : 지정된 태그가 보유하고 있는 자식 태그들
+                    parenElement속성 : 지정된 태그의 부모태그
+                    previousElementSiblings: 지정된 태그 중 앞의 형제 태그
+                    nextElementSiblings : 지정된 태그의 아래 형제 태그
+
+                    * 얘들은 여러 번 사용이 가능하다. (next의 next의 next)
+                </pre>
+                
+                <button onclick="searchElement(this)">태그 탐색하기</button>
+
+                <div id="tableContainer">
+                    <table>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                        </tr>
+                    </table>
+
+                    <ul>
+                        <li>html</li>
+                        <li>css</li>
+                        <li>javascript</li>
+                        <li>jquerywe</li>
+                    </ul>
+                </div>
+
+                <script>
+                    const searchElement = (e)=>{
+                        // 자식 태그 확인하기
+                       let table = document.getElementById("tableContainer")
+
+                                console.log("table의 children : ");
+                                console.log(table.children); //자식 태그만 나옴 후손 X
+                        let c = table.children;
+                                console.log("table의 children 객체의 0번째 인덱스 : ");
+                                console.log (c[0].children);
+                                console.log("table의 children 객체의 1번째 인덱스 : ");
+                                console.log (c[0].children);
+
+                            // foreach는 배열거니까 객체인 위와 같은 녀석들에서 사용 X
+                            //  이라고 해도 호출할 수 있는 방법이 있다.
+                                console.log("Array.prototype.forEach.call _ forEach");
+                            Array.prototype.forEach.call(c, element=>{
+                                console.log(element);
+                            })
+                                console.log(e.parentElement.parentElement);
+
+                                console.log(document.body.children);
+                        let all = document.body.children
+                            Array.prototype.forEach.call(all, e =>{
+                                if(e.tagName=="PRE"){
+                                    e.style.color = "darkgreen";
+                                    e.style.fontSize = "20px";
+                                }
+                            })
+
+                                console.log("sibling");
+                                console.log(e.previousElementSibling); //같은 레벨의 전
+                                console.log(e.nextElementSibling); // 같은 레벨의 다음
+
+
+                    }
+                </script>
+
+                <br><hr>
+                    <h2>클래스 속성 관리하기</h2>
+                    <pre>
+                        css를 미리 클래스 이름으로 지정한 다음 태그에 클래스를 부여하여 css를 적용하는 방식을 많이 이용한다.
+                    </pre>
+
+                    <style>
+                        .back1{
+                            background-color: navy;
+                            color: white;
+                        }
+
+                        .back2{
+                            background-color: pink;
+                            color: white;
+                        }
+
+                        .font{
+                            font-size: 32px;
+                            font-weight: bolder;
+                            text-shadow: 3px 3px 5px black;
+                        }
+                    </style>
+
+                    <div class="a b c">
+                        <h2 id="target">오늘은 월요일 월요병이 없는 날...Rclass 화이팅!!</h2>
+                        <button onclick="addClass()">back</button>
+                        <button onclick="rmClass()">rm</button>
+<!-- 
+    className은 클래스를 준 그대로의 이름  class = "a b c"
+    classList는 위와 같은 클래스들을 stack 방식으로 관리한다. 
+
+    classList: DOMTokenList
+
+0: "a"
+
+1: "b"
+
+2: "c"
+
+
+className: "a b c"
+-->
+                    </div>
+
+                    <script>
+                        const addClass = () =>{
+                            let target = document.getElementById("target");
+                            // target.className= "back1 font"
+                            target.classList.add("back2");
+                            target.classList.add("font");
+
+                                for (let i =0; i<target.classList.length; i++){
+                                    if(target.classList[i]=="back1"){
+                                        target.classList.remove("back1");
+                                        target.classList.add("back2");
+                                        break;
+                                    } else if(target.classList[i]=="back2") {
+                                        target.classList.remove("back2");
+                                        target.classList.add("back1");
+                                        break;
+                                    }
+                                }
+                        }
+
+                        const rmClass = () =>{
+                            let target = document.getElementById("target");
+                            let clist = target.classList;
+                                for(let i =0; i<clist.length; i++){
+                                    if(target.classList[i] != ""){
+                                        target.classList.remove(target.classList[i]);
+                                    }
+                                    console.log(clist[i]);
+                                }
+                        }
+                        
+                    </script>
+                    <br><hr>
+
+                    <h2>객체 태그(elements) 삭제하기</h2>
+                    <pre>
+                        페이지에 있는 태그, 생성된 태그를 삭제하는 함수
+                        remove(), removeChild() : 둘 다 객체를 삭제하는 것
+
+                        본인태그.remove() : 자기 자신을 삭제하는 함수
+                        부모태그.removeChild(자식태그) : 자기 자식을 삭제하는 함수
+                    </pre>
+
+                    <button onclick="rmTest()">객체 삭제하기</button>
+                    <button onclick="rmTest2()">객체 삭제하기2</button>
+                    <button onclick="changePosition()">포지션 변경</button>
+
+
+                    <div id="removeChild">
+                        <ul>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                        </ul>
+                    </div>
+                    <script>
+                        
+                        let list = document.querySelectorAll("#removeChild li");
+                        let counti = 0;
+                        const changePosition = () =>{
+                            let ul = document.querySelector("#removeChild>ul");
+                            ul.appendChild(list[counti++])
+                            if(counti ==4){
+                                counti =0;
+                            }
+
+                        }
+
+                            for(let i =0; i<list.length; i++){
+                                list[i].addEventListener("click", (e)=>{
+                                    e.target.remove();
+                                })
+                            }
+
+                        
+                        const rmTest = () =>{
+                            let parent = document.querySelector("#removeChild");
+                            let ul = document.querySelectorAll("#removeChild>ul");
+                            ul.removeChild(ul.childNodes[0]);
+                        }
+
+                        const rmTest2 = () =>{
+                            let del = document.querySelector("#removeChild>ul>li:last-child");
+                            del.remove();
+                        }
+
+
+                    </script>
+
+                    <!-- 원래 있는 객체를 appendChild하면 순서가 바뀐다?? -->
+
+                    <!-- 이미지 세 개를 넣고 버튼을 클릭하면 이미지 위치가 변경될 수 있게 해볼?? -->
+                    <div id="im">
+                        <img src="http://img.danawa.com/prod_img/500000/446/174/img/3174446_1.jpg?shrink=360:360&_v=20170227163851" alt="" width="200" height="200" >
+                        <img src="http://img.danawa.com/prod_img/500000/089/982/img/1982089_1.jpg?shrink=360:360&_v=20200625124559" alt="" width="200" height="200">
+                        <img src=http://image.auction.co.kr/itemimage/19/76/58/1976580746.jpg alt="" width="200" height="200">
+                     </div>
+                     <button onclick="imgChan()">이미지 체인지</button>
+                     <button onclick="imgStop()">멈춰!</button>
+                <script>
+
+                    let imgs = document.querySelectorAll("#im img");
+                    let ibox = document.getElementById("im");
+                    let j =0;
+                    let inter;
+                    const imgChan = () =>{
+                       inter = setInterval(()=>{
+                            im.appendChild(imgs[j++]);
+                                if(j==3){
+                                    j=0;
+                                }
+                        
+                        },0.1)
+                    }
+
+                    const imgStop = () =>{
+                        clearInterval(inter);
+                    }   
+
+                </script>
+        </body>
+    </html>

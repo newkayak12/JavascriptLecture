@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>EVENT</title>
+
+        </head>
+
+        <body>
+
+            <!-- 
+                입력장치가 전기 신호를 줬을 때 운영체제가 이를 받고 업무를 실행시키는 식으로...
+                이(이벤트)를 받아서 기능(함수)를 처리하는 ...
+                운영체제나 V8(구글이 만든 JS Compiler가)등 이 받아서..
+
+                
+
+
+                WEB APP/ APP은 달라요_ 모바일 것을 자꾸 웹으로 넘기려고 하지 마세요... 둘 간의 차이가 있으니까
+
+
+                이벤트는 이벤트 속성과 이벤트핸들러(함수)를 연동하여 이벤트 발생 시 특정 기능을 하도록 하는 것
+                
+                > 이벤트의 종류는 컴퓨터가 이미 정해 놓은 것. _ on~이렇게 되어있는거 이벤트 속성이라고 했잖아요. > 그렇게 지정 되어있다구요
+                거기에 핸들러를 이어주면 된다구요
+
+
+                고전 이벤트 모델 : elements를 가져오고 .onclick으로 
+                인라인 이벤트 모델  :  inline은 onclick으로 해서 주는 것
+                **** 둘은 비스무리해요
+
+                표준 이벤트 모델 : addEventListener( 이벤트 이름, 핸들러, 확장(버블링/캡쳐링) )
+                > this가 window일수도, 이벤트 발생 객체일 수도 있어서... 차라리 이벤트 객체를 가져다 쓰는게 나을 수도 있어요
+
+
+                IE 이벤트 모델
+
+
+
+                
+             -->
+             <h1>EVENT</h1>
+
+             <h2>EVENT 속성 알아보기</h2>
+
+             <dl>
+                 <dt>input태그 관련 이벤트</dt>
+                 <dd>focus : input태그에 focus되었을 때 발생 * 주의할 것은 focus가 되면서 blur가 같이 처리됨(blur랑 focus랑 같이 처리되면 무한 루프를 돈다.)</dd>
+                 <dd>blur : input태그에서 focus가 사라졌을 때 발생 </dd>
+                 <dd>change : input에 있는 value속성의 값이 변경 되었을 때 발생 * select태그 이벤트에 많이 사용</dd>
+                 <dd>submit :  form 태그에서 submit타입을 클릭했을 때 발생(form태그로 데이터 전송 시 발생)</dd>
+                 <dd>reset : form태그에서 reset타입을 클릭했을 때 발생</dd>
+             </dl>
+
+             <dl>
+                 <dt>마우스 관련 이벤트</dt>
+                 <dd>click : 마우스 좌클릭 했을 때 발생하는 </dd>
+                 <dd>dbClick : 마우스 더블 클릭 했을 때 발생하는 </dd>
+                 <dd>mouseEnter : 지정한 영역 안으로 마우스가 들어왔을 때 발생하는 </dd>
+                 <dd>mouseLeave : 지정한 영역 안에서 밖으로 나갔을 때 발생하는 </dd>
+             </dl>
+
+             <dl>
+                 <dt>key 관련 이벤트</dt>
+                 <dd>keyUp : 키가 올라왔을 때 발생하는 </dd>
+                 <dd>keyDown : 키가 내려갔을 때 발생하는 </dd>
+                 <dd>keyPress : 키가 눌렸을 떄 발생하는 </dd>
+             </dl>
+
+             <dl>
+                 <dt>윈도우 창 관련 이벤트_윈도우 페이지</dt>
+                <dd> load : 페이지의 태그들이 다 로드됐을 때 발생하는  * 페이지 관련 이벤트 </dd>
+                <dd>resize : 윈도우의 크기가 조정됐을때 발생하는 </dd>
+                <dd>scroll : 창에서 스크롤이 조정됐을 때 발생하는 </dd>
+             </dl>
+
+            
+            
+
+        </body>
+    </html>
