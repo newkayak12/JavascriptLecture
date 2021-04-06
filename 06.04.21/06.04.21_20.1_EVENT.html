@@ -162,6 +162,9 @@
             </script>
 <br><hr>                
                 <h2>윈도우에 이벤트 설정하기</h2>
+                <pre>
+                    resize, scroll 등등
+                </pre>
             <script>
                 window.addEventListener("resize", (e)=>{
                     console.log(e);
@@ -169,10 +172,223 @@
                 })
 
 
-                window.addEventListener("scroll", (e)=>{
-                    console.log(e);
-                    console.log(window.scrollX, window.scrollY);
-                })
+                // window.addEventListener("scroll", (e)=>{
+                //     console.log(e);
+                //     console.log(window.scrollX, window.scrollY);
+                // })
             </script>
+<br><hr>
+                <h1>생성된 태그에 이벤트 설정하기_ 실습</h1>
+                <button id="createTable">테이블</button>
+                <button id="addTr">행 추가</button>
+                <!-- 5*5테이블 생성, 그 때! 마지막 5열에는 버튼 태그를 추가할 것 -->
+                <div id="area"></div>
+
+                <script>
+
+                //     console.log("이거");
+                    
+                //    let tableclosure= () =>{
+                //         let tab = document.getElementById("createTable");
+
+                //         let getTable = ()=>{
+                //             return tab;
+                //         }
+                //         console.log(tableclosure().getTable());
+                //     }
+
+                    // console.log(tableclosure().getTable());
+
+// 클로저 / this / scope (scopeChain, lexical scope)
+
+                        let addTr = document.getElementById("addTr")
+                        let table = document.getElementById("createTable");
+                        
+                        // addTr.addEventListener("click",(e)=>{
+                        //    const preElement = e.target.previousElementSibling;
+                        //      if(preElement.tagName =="TABLE"){
+                        //          let tr= document.createElement("tr");
+                        //             for(let i=0; i<5){
+                        //                 let td = document.createElement("td");
+                        //                 td.innerText="값";
+                        //                 tr.appendChild(td);
+                        //             }
+                        //             preElement.appendChild(tr);
+
+                        //      } else {
+                        //          alert("추가 못함"):
+                        //      }
+                        // })
+                    
+                    table.addEventListener("click",(e)=>{
+                        console.log("됨?");
+                        z = 5;
+
+                        let area = document.getElementById("area");
+                        let tbl = document.createElement("table");
+                        tbl.setAttribute("id","fTable")
+                        let td;
+                        let tr;
+                        let con;
+                            console.log(tbl);
+                            for(let i =0; i<5; i++){
+
+                                tr = document.createElement("tr");
+                                
+                                for(let j=0; j<5; j++){
+                                    console.log("?");
+                                    td = document.createElement("td");
+                                    console.log(td);
+                                    con = document.createTextNode(j+1);
+                                    console.log(con);
+                                    
+                                        if(j==4){
+                                        
+                                            con = document.createElement("button");
+                                            con.setAttribute("id","con"+i)
+                                            con.innerHTML="버튼"+i;
+                                            console.log("con"+i);
+                                            
+                                            con.addEventListener("click", (i)=>{
+                                                let me = i.target;
+                                                let parent = me.parentElement.parentElement;
+                                                parent.style.backgroundColor="red";
+                                                
+                                            })
+
+                                        }
+
+                                    td.appendChild(con);
+                                    tr.appendChild(td);
+                                    tbl.appendChild(tr);
+                                   
+                                 
+
+
+
+
+                                }
+
+                            }
+
+                            
+                            addTr.addEventListener("click",(e)=>{
+                                    // let tbl = document.getElementById("fTable");
+                                    
+                                    if(tbl==undefined){
+                                        alert("테이블이 없습니다.")
+                                    } else{
+
+                                    
+                                    let tdC = document.createElement("tr");
+                                        for(let i=0; i<5; i++){
+                                                let trC = document.createElement("td");
+                                                let txt = document.createTextNode(i+1);
+
+                                                if(i==4){
+                                                    
+                                                    txt = document.createElement("button");
+                                                    txt.innerHTML= "버튼"+(z++);
+                                                    // txt.addEventListener("click" (e=>{
+
+                                                    //     e.target.parentElement.parentElement.style.backgroundColor="red";
+                                                    // }))
+                                                }
+                                                trC.appendChild(txt);
+                                                tdC.appendChild(trC);
+                                            }
+                                        tbl.appendChild(tdC);
+                            
+                                    }
+                            })
+                            area.appendChild(tbl);
+                            
+                    })
+
+                    // console.log(tbl);
+                    
+
+                </script>
+
+<br><hr>
+                    <h3>댓글 달기</h3>
+                    <!-- nextElementSibling, previousElementSibling -->
+                    <div id="text">
+                        <input type="text" name="main" id="mainT">
+                        <button id="mainTbtn">댓글 달기</button>
+
+
+                        <div id="textLine">
+
+                        </div>
+
+                    </div>
+
+                    <script>
+                        
+                            let textLine = document.getElementById("textLine");
+                            let btnInput = document.getElementById("mainTbtn")
+
+                            // createElement > innerText = 값; 이렇게 집어 넣어도 된다는데........왜 이렇게 뭔가 어색하지?
+
+                            btnInput.addEventListener("click", (e)=>{
+                                let txtTmp = document.getElementById("mainT").value;
+                                let txtNd = document.createTextNode(txtTmp);
+                                let repl  = document.createElement("P");
+                                let btnSub = document.createElement("button");
+                                let list = document.createElement("ul");
+                                let divSub = document.createElement("DIV");
+                                
+                                
+                                    btnSub.innerText="대댓글 달기"
+                                    repl.appendChild(txtNd);
+                                    divSub.appendChild(repl);
+                                    repl.appendChild(btnSub);
+
+
+                                    divSub.appendChild(repl);
+                                    divSub.appendChild(list);
+
+
+                                    textLine.appendChild(divSub);
+
+                                        btnSub.addEventListener("click",(e)=>{
+                                            let retxt = document.createElement("input");
+                                            let rebtn = document.createElement("button");
+                                            rebtn.innerHTML= "대댓글 달기";
+
+                                            divSub.appendChild(retxt);
+                                            divSub.appendChild(rebtn);
+
+
+                                            rebtn.addEventListener("click", (e)=>{
+                                                let rereple = retxt.value;
+
+                                                let reretxtcon = document.createTextNode(rereple);
+                                                let lis = document.createElement("li");
+                                                lis.style.listStyle="none";
+                                                lis.appendChild(reretxtcon);
+                                                list.appendChild(lis);
+
+
+                                                retxt.remove();
+                                                rebtn.remove();
+                                            })
+                                        })
+
+
+                                        txtTmp = document.getElementById("mainT").value="";
+                            })
+
+                            
+
+
+                        
+
+
+
+                    </script>
+                
+
         </body>
     </html>
