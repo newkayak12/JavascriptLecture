@@ -16,6 +16,7 @@
                 <h3>클릭하면 변경3</h3>
 
             <script>
+                
                 //h3를 클릭하면 글자색을 변경하는 이벤트 핸들러
 
                let elemetnsH3 = document.querySelectorAll("h3");
@@ -172,10 +173,10 @@
                 })
 
 
-                // window.addEventListener("scroll", (e)=>{
-                //     console.log(e);
-                //     console.log(window.scrollX, window.scrollY);
-                // })
+                window.addEventListener("scroll", (e)=>{
+                    console.log(e);
+                    console.log(window.scrollX, window.scrollY);
+                })
             </script>
 <br><hr>
                 <h1>생성된 태그에 이벤트 설정하기_ 실습</h1>
@@ -185,6 +186,9 @@
                 <div id="area"></div>
 
                 <script>
+
+
+
 
                 //     console.log("이거");
                     
@@ -200,6 +204,9 @@
                     // console.log(tableclosure().getTable());
 
 // 클로저 / this / scope (scopeChain, lexical scope)
+
+
+
 
                         let addTr = document.getElementById("addTr")
                         let table = document.getElementById("createTable");
