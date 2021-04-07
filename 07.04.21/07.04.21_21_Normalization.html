@@ -329,6 +329,7 @@
                 <button onclick="test7()">실행</button>
                 <div id="area7"></div>
             <script>
+                //휴대전화
                 const test7=() =>{
                     let area = document.getElementById("area7");
                     let reg = /a*b/g;
@@ -346,7 +347,131 @@
                 }
             </script>
 
-            
+<!-- 여기부터 예진이 코드 -->
+                    <h3>반복수량을 지정하는 기호 : {}</h3>
+                    <p>
+                        문자{n} : {}의 왼쪽에 있는 문자를 n번반복
+                        문자{n,} : {}의 왼쪽에 있는 문자를 n번 이상 반복
+                        문자{n, m} : {}의 왼쪽에 있는 문자를  n번에서 m번까지 반복
+                    </p>
+
+                    <button onclick="test8();">실행</button>
+                    <div id="area8"></div>
+
+                    <script>
+                        const test8 = () => {
+
+                            let area = document.getElementById("area8");
+                            let str = "AA ABA ABBA ABBBA";
+                            let reg = /AB{2}/gi;
+                            
+
+                            area.innerHTML += `/AB{2}/gi : ${str.replace(reg, "($&)")}<br>`;
+                            // /AB{2}/gi : AA ABA (ABB)A (ABB)BA
+
+
+                            reg = /AB{1,}A/gi; // == AB+A
+                            area.innerHTML += `/AB{1,}A/gi : ${str.replace(reg, "($&)")}<br>`;
+                            // /AB{1,}A/gi : AA (ABA) (ABBA) (ABBBA)
+
+                            reg = /AB{2, 3}A/gi; 
+                            area.innerHTML += `/AB{2, 3}A/gi : ${str.replace(reg, "($&)")}<br>`;
+                            // /AB{2, 3}A/gi : AA ABA ABBA ABBBA
+                        }
+                    </script>
+
+
+
+
+
+                    <p>정규표현식을 만들때는 내가 찾으려고 하는 문자에 대한 규칙(패턴)을 메타문자로 적용</p>
+                    <!-- 예를들면 이메일을 쓸땐 @를 쓰게끔 -->
+
+                    <p>
+                        다음 문자열을 모두 골라낼 수 있는 정규표현식을 생성하라
+                        삭선은 제외 
+                    </p>
+
+                    <button onclick="select();">골라내기</button>
+                    <div id="result"></div>
+
+                    <ul>
+                        <li>O.K.</li>
+                        <li>K.O.R.E.A.</li>
+                        <li>봄은 졸음의 계절이다.</li>
+                        <li>99.9</li>
+                        <li><s>0.9</s></li>
+                    </ul>
+
+                    <script>
+                        const select = () => {
+
+                            let reg = /\D/g;
+
+                            // for(let i=1; i <= 5; i++) {
+
+                            //     let str = document.querySelectorAll(`ul>li:${i}th-child`).innerHTML;
+                            //     console.log(str);
+                            // }
+
+                            let str = document.getElementsByTagName("li");
+
+                            let result = document.getElementById("result");
+                            result.innerHTML += `${str.replace(reg, "($&)")}`;
+
+                        }
+                    </script>
+
+
+                    <p>선생님 풀이</p>
+                    <button id="btn">체크하기</button>
+                    <!-- .앞에 문구가 2개이상이면 찾아라 -->
+
+                    <script>
+                        document.getElementById("btn").addEventListener("click", (e) => {
+                            
+                            let lis = document.querySelectorAll("ul>li");
+
+                            for(let i=0; i < lis.length; i++) {
+
+                                let reg = /..\./g;
+                                let temp = lis[i].innerText;
+                                console.log(`${temp} : ${reg.test(temp)}`);
+                            }
+                        });
+                    </script>
+
+
+
+
+
+
+                    <p>
+                        숫자로 시작하지 않으면서, xyz중 하나로 끝나는 4글자 이상의 문자열을 검사할 수 있도록 정규표현식을 만들어보세요.
+                    </p>
+
+                    <input type="text" name="" id="inputData">
+                    <button id="testbtn">검사</button>
+
+                    <script>
+                        document.getElementById("testbtn").addEventListener("click", (e) => {
+
+                            // let reg = /^[^0-9]{1,}..[xzy]{1,}$/; // 잘못된 코드 
+                            let reg = /^[^0-9]{1,}..{1,}[xzy]{1,}$/;
+
+                            let val = document.getElementById("inputData").value;
+
+                            if(reg.test(val)) {
+                                alert("적합한 문자열입니다");
+                            } else {
+                                alert("부적합한 문자열입니다");
+                                document.getElementById("inputData").value = "";
+                                document.getElementById("inputData").focus();
+                            }
+
+                        });
+                    </script>
+
             
     </body>
 </html>
